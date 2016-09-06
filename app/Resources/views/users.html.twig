@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 text-justify red">
+
+                    {% block foo %}
+                    {% endblock %}
+
+                    <h3>Użytkownicy</h3>
+                    <ul>
+                        {% for user in users %}
+                            <li>
+                                {{ user.name }}
+                                <a class="glyphicon glyphicon-remove deleteItem" aria-hidden="true" href="delete/{{ user.id }}"></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% for msg in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ msg }}
+                        </div>
+                    {% endfor %}
+                    {% for msg in app.session.flashBag.get('delete') %}
+                        <div class="alert alert-info fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ msg }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
