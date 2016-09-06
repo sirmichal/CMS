@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Footer;
 use AppBundle\Form\NewUserForm;
 use AppBundle\Form\FooterForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -85,6 +86,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Response
      * @Route("footer", name="footer")
      */
@@ -94,8 +96,31 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dump($data);
-            die;
+
+            $street = new Footer();
+            $street->setAttr('street');
+            $street->setValue($data['street']);
+
+            $city = new Footer();
+            $city->setAttr('city');
+            $city->setValue($data['city']);
+
+            $phone_number = new Footer();
+            $phone_number->setAttr('phone_number');
+            $phone_number->setValue($data['phone_number']);
+
+            $postal_code = new Footer();
+            $postal_code->setAttr('postal_code');
+            $postal_code->setValue($data['postal_code']);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($street);
+            $em->persist($city);
+            $em->persist($phone_number);
+            $em->persist($postal_code);
+
+            $em->flush();
+
             return $this->redirectToRoute('footer');
         }
 
