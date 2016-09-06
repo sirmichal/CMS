@@ -3,13 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\NewUserForm;
+use AppBundle\Form\FooterForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Entity\Name;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller
 {
@@ -88,19 +86,20 @@ class DefaultController extends Controller
 
     /**
      * @return Response
+     * @Route("footer", name="footer")
      */
-    public function makeAction()
+    public function footerAction(Request $request)
     {
-        // create a task and give it some dummy data for this example
-        $name = new Name();
-        $form = $this->createFormBuilder($name)
-            ->add('name', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Zapisz'))
-            ->getForm();
+        $form = $this->createForm(FooterForm::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dump($data);
+            die;
+            return $this->redirectToRoute('footer');
+        }
 
-        return $this->render('form.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->render('footer.html.twig', array('form' => $form->createView()));
     }
 
 }
