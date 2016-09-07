@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Footer;
+use AppBundle\FooterHandler;
 use AppBundle\Form\NewUserForm;
 use AppBundle\Form\FooterForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -92,34 +92,15 @@ class DefaultController extends Controller
      */
     public function footerAction(Request $request)
     {
-        $form = $this->createForm(FooterForm::class);
+        $footerArray = $this->getDoctrine()->getRepository('AppBundle:Footer')->findAll();
+        $footerHandler = new FooterHandler($footerArray);
+        
+        $form = $this->createForm(FooterForm::class, $footerHandler);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $street = new Footer();
-            $street->setAttr('street');
-            $street->setValue($data['street']);
-
-            $city = new Footer();
-            $city->setAttr('city');
-            $city->setValue($data['city']);
-
-            $phone_number = new Footer();
-            $phone_number->setAttr('phone_number');
-            $phone_number->setValue($data['phone_number']);
-
-            $postal_code = new Footer();
-            $postal_code->setAttr('postal_code');
-            $postal_code->setValue($data['postal_code']);
-
+            $footerHandler = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($street);
-            $em->persist($city);
-            $em->persist($phone_number);
-            $em->persist($postal_code);
-
-            $em->flush();
+            $footerHandler->persistFooterData($em);
 
             return $this->redirectToRoute('footer');
         }

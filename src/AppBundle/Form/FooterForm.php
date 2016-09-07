@@ -28,7 +28,7 @@ class FooterForm extends AbstractType {
     }
 
     public function configureOptions(OptionsResolver $resolver) {
-//        $resolver->setDefaults(['data_class' => 'AppBundle\Form\FooterForm']);
+        $resolver->setDefaults(['data_class' => 'AppBundle\FooterHandler']);
     }
 
     public function getName() {
