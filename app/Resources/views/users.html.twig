@@ -13,7 +13,7 @@
                         {% for user in users %}
                             <li>
                                 {{ user.name }}
-                                <a class="glyphicon glyphicon-remove deleteItem" aria-hidden="true" href="delete/{{ user.id }}"></a>
+                                <a class="glyphicon glyphicon-remove deleteItem" aria-hidden="true" href={{ path('delete_user', {'userId': user.id}) }}></a>
                             </li>
                         {% endfor %}
                     </ul>

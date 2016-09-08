@@ -2,8 +2,6 @@
 
 namespace AppBundle;
 
-use AppBundle\Entity\Footer;
-
 class FooterHandler {
 
     // data from form
@@ -56,31 +54,6 @@ class FooterHandler {
             }
         }
         $em->flush();
-
-//        $streetEntity = new Footer();
-//        $streetEntity->setAttr('street');
-//        $streetEntity->setValue($this->street);
-//
-//        $cityEntity = new Footer();
-//        $cityEntity->setAttr('city');
-//        $cityEntity->setValue($this->city);
-//
-//        $phoneNumberEntity = new Footer();
-//        $phoneNumberEntity->setAttr('phone_number');
-//        $phoneNumberEntity->setValue($this->phone_number);
-//
-//        $postalCodeEntity = new Footer();
-//        $postalCodeEntity->setAttr('postal_code');
-//        $postalCodeEntity->setValue($this->postal_code);
-//
-//        $em->persist($streetEntity);
-//        $em->persist($cityEntity);
-//        $em->persist($phoneNumberEntity);
-//        $em->persist($postalCodeEntity);
-//        $em->flush();
-        
-        
-        
     }
     
 }
