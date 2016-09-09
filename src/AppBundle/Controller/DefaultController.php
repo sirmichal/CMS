@@ -95,9 +95,18 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($media);
             $em->flush();
-            return $this->redirect($this->generateUrl('home'));
+            return $this->redirect($this->generateUrl('media_library'));
         }
         return $this->render('upload.html.twig', array('form' => $form->createView()));
+    }
+    
+    /**
+     * @Route("media/library", name="media_library")
+     */
+    public function mediaLibraryAction(Request $request) {
+        $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AppBundle:Media')->findAll();
+        
+        return $this->render('media_library.html.twig', array('files' => $mediaFiles));
     }
 
     /**
