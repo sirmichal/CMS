@@ -3,24 +3,22 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <form action="upload/upload" method="post" enctype="multipart/form-data">
+                
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_row(form.file) }}
+                <button type="submit" class="btn btn-default">Wyślij</button>
+                {{ form_end(form) }}
+                
+                
+                {#<form action="upload/upload" method="post" enctype="multipart/form-data">
                     Select image to upload:
                     <br>
                     <label class="btn btn-default btn-file"> Browse
                         <input type="file" name="fileToUpload" style="display: none;">
                     </label>
                     <input type="submit" value="Upload Image" name="submit" class="btn btn-default">
-                </form>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 text-justify red">
-                    <p>
-                        dsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa fdsfsadf dsa f
-                    </p>
-                </div>
-                <div class="col-sm-6 text-justify yellow">
-                    khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh khgjkhjkhgjkh
-                </div>
+                </form>#}
             </div>
         </div>
     </div>

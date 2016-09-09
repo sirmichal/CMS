@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\FooterHandler;
 use AppBundle\Form\NewUserForm;
 use AppBundle\Form\FooterForm;
+use AppBundle\Form\FileUploadForm;
+use AppBundle\Entity\Media;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,9 +82,22 @@ class DefaultController extends Controller
     /**
      * @Route("upload", name="upload")
      */
-    public function uploadAction()
+    public function uploadAction(Request $request)
     {
-        return $this->render('upload.html.twig');
+        $media = new Media();
+        $form = $this->createForm(FileUploadForm::class, $media);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $media->getFile();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $media->setFile($fileName);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($media);
+            $em->flush();
+            return $this->redirect($this->generateUrl('home'));
+        }
+        return $this->render('upload.html.twig', array('form' => $form->createView()));
     }
 
     /**
