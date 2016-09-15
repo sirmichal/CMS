@@ -10,7 +10,9 @@
         {% endblock %}
     </head>
     <body>
-        {% include 'sidebar.html.twig' %}
+        {% block sidebar %}
+            {% include 'sidebar.html.twig' %}
+        {% endblock %}
         {% block content %}
         {% endblock %}
         

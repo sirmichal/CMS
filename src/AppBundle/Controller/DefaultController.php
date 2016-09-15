@@ -23,7 +23,7 @@ class DefaultController extends Controller
     {
         return $this->render('home.html.twig');
     }
-
+    
     /**
      * @Route("users", name="users")
      * @param Request $request
