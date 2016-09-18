@@ -2,10 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>CMS</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+            {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">#}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
         {% endblock %}
     </head>
@@ -19,6 +21,7 @@
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.1.0.js') }}"></script>
             <script src="{{ asset('js/bootstrap.js') }}"></script>
+            {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>#}
             <script src="{{ asset('js/script.js') }}"></script>
         {% endblock %}
     </body>
