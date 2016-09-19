@@ -1,15 +1,12 @@
 {% block sidebar %}
     <div class="sidebar">
-        <ul>
-            <div><li class="topitem padding-left-menu">Ustawienia<span>&#x25C4</span></li>
-                <li class="subitem"><a class="padding-left-menu" href={{ path('upload') }}>Wyślij</a></li>
-                <li class="subitem"><a class="padding-left-menu" href={{ path('footer') }}>Stopka</a></li>
-                <li class="subitem"><a class="padding-left-menu" href={{ path('media_library') }}>Biblioteka mediów</a></li>
-            </div>
-
-            <div><li class="topitem"><a class="padding-left-menu" href={{ path('users') }}>Użytkownicy</a></li></div>
-            <div><li class="topitem"><a class="padding-left-menu" href={{ path('fos_user_change_password') }}>Zmień hasło</a></li></div>
-            <div><li class="topitem"><a class="padding-left-menu" href={{ path('fos_user_security_logout') }}>Wyloguj<span class="glyphicon glyphicon-log-out"></span></a></li></div>
-        </ul>
+        <div class="panel panel-default topitem">
+            <a href={{ path('upload') }}><div class="panel-body">Wyślij</div></a>
+            <a href={{ path('footer') }}><div class="panel-body">Stopka</div></a>
+            <a href={{ path('media_library') }}><div class="panel-body">Biblioteka mediów</div></a>
+            <a href={{ path('users') }}><div class="panel-body">Użytkownicy</div></a>
+            <a href={{ path('fos_user_change_password') }}><div class="panel-body">Zmień hasło</div></a>
+            <a href={{ path('fos_user_security_logout') }}><div class="panel-body">Wyloguj<span class="glyphicon glyphicon-log-out"></span></div></a>
+        </div>
     </div>
 {% endblock %}
