@@ -10,8 +10,7 @@
     position: fixed;
     width: 200px;
     height: 100%;
-    background-color: #f5f5f5;
-    
+    background-color: #eee;
     z-index: 1000;
 }
 
@@ -24,16 +23,16 @@
 .topitem {
     border: 0px;
     box-shadow: 0px 0px 0px 0px;
-    background-color: #f5f5f5;
+    background-color: #eee;
 }
 
 .topitem a:hover {
-    color: black;
+    color: #204769;
     text-decoration: none;
 }
 
 .topitem a:hover div {
-    background-color: #eee;
+    background-color: #f5f5f5;
 }
 
 .panel-body span {
