@@ -4,9 +4,8 @@
         <div class="container-fluid">
             <div class="row">
 
-                {% form_theme form 'bootstrap_3_layout.html.twig' %}
                 {{ form_start(form) }}
-                {{ form_row(form.file) }}
+                {{ form_widget(form.imageFile, { 'attr': {'class': 'btn btn-default'} }) }}
                 <button type="submit" class="btn btn-default">Wyślij</button>
                 {{ form_end(form) }}
 

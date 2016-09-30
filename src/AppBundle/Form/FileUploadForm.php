@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class FileUploadForm extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('file', FileType::class);
+        $builder->add('imageFile', FileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver) {

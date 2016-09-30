@@ -65,10 +65,6 @@ class DefaultController extends Controller
         $form = $this->createForm(FileUploadForm::class, $media);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $media->getFile();
-            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-            $file->move($this->getParameter('upload_directory'), $fileName);
-            $media->setFile($fileName);
             $em = $this->getDoctrine()->getManager();
             $em->persist($media);
             $em->flush();
@@ -85,6 +81,32 @@ class DefaultController extends Controller
         
         return $this->render('media_library.html.twig', array('files' => $mediaFiles));
     }
+    
+
+    /**
+     * @Route("media/delete", name="delete_media")
+     */
+    public function deleteMediaAction(Request $request) {
+        
+        $content = $request->getContent();
+        if (!empty($content)) {
+            $files = json_decode($content, true);
+            $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Media');
+            foreach ($files as $filename) {
+                $repo->findBy($criteria)
+            }
+
+
+
+            return new Response("OK");
+        }
+
+        return new Response("asdsad");
+        
+    }
+    
+    
+    
 
     /**
      * @param Request $request
