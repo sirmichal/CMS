@@ -2,25 +2,112 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Footer;
 use AppBundle\Form\FooterForm;
 use AppBundle\FooterHandler;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Symfony\Component\HttpFoundation\Request;
 
-class FooterService {
-    
+class FooterService
+{
+
+    /**
+     * @var FormFactory
+     */
     private $factoryForm;
+
+    /**
+     * @var Registry
+     */
     private $doctrine;
 
-    public function __construct(FormFactory $factoryForm, Registry $doctrine) {
+    /**
+     * @var \AppBundle\Repository\FooterRepository
+     */
+    private $repo;
+
+    /**
+     * @var Form
+     */
+    private $form;
+
+    /**
+     * @var Footer
+     */
+    private $streetEnt;
+    /**
+     * @var Footer
+     */
+    private $cityEnt;
+    /**
+     * @var Footer
+     */
+    private $phoneNumEnt;
+    /**
+     * @var Footer
+     */
+    private $postalCodeEnt;
+
+    /**
+     * FooterService constructor.
+     * @param FormFactory $factoryForm
+     * @param Registry $doctrine
+     */
+    public function __construct(FormFactory $factoryForm, Registry $doctrine)
+    {
         $this->factoryForm = $factoryForm;
         $this->doctrine = $doctrine;
+        $this->repo = $this->doctrine->getManager()->getRepository('AppBundle:Footer');
     }
-    
-    public function createForm() {
-        $footerArray = $this->doctrine->getRepository('AppBundle:Footer')->findAll();
-        $footerHandler = new FooterHandler($footerArray);
-        $form = $this->factoryForm->create(FooterForm::class, $footerHandler);
-        return $form;
+
+    /**
+     * @return Form|\Symfony\Component\Form\FormInterface
+     */
+    public function createForm()
+    {
+        $this->readDataFromDb();
+
+        $this->form = $this->factoryForm->create(FooterForm::class);
+        $this->form->setData([
+            'street' => $this->streetEnt->getValue(),
+            'city' => $this->cityEnt->getValue(),
+            'phoneNum' => $this->phoneNumEnt->getValue(),
+            'postalCode' => $this->postalCodeEnt->getValue()
+        ]);
+        return $this->form;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function submit(Request $request)
+    {
+        $this->form->handleRequest($request);
+        if ($this->form->isSubmitted() && $this->form->isValid()) {
+            $this->saveDataToDb();
+        }
+    }
+
+    private function saveDataToDb()
+    {
+        $em = $this->doctrine->getManager();
+
+        $formData = $this->form->getData();
+        $this->streetEnt->setValue($formData['street']);
+        $this->cityEnt->setValue($formData['city']);
+        $this->phoneNumEnt->setValue($formData['phoneNum']);
+        $this->postalCodeEnt->setValue($formData['postalCode']);
+
+        $em->flush();
+    }
+
+    private function readDataFromDb()
+    {
+        $this->streetEnt = $this->repo->findOneByAttr('street');
+        $this->cityEnt = $this->repo->findOneByAttr('city');
+        $this->phoneNumEnt = $this->repo->findOneByAttr('phone_number');
+        $this->postalCodeEnt = $this->repo->findOneByAttr('postal_code');
     }
 }

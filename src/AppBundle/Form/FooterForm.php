@@ -18,17 +18,13 @@ class FooterForm extends AbstractType {
             'label' => 'Miasto:',
             'attr' => array('placeholder' => 'Wpisz miejscowość')]);
         
-        $builder->add('postal_code', TextType::class, [
+        $builder->add('postalCode', TextType::class, [
             'label' => 'Kod pocztowy:',
             'attr' => array('placeholder' => 'Wpisz kod pocztowy')]);
         
-        $builder->add('phone_number', TextType::class, [
+        $builder->add('phoneNum', TextType::class, [
             'label' => 'Nr telefonu:',
             'attr' => array('placeholder' => 'Wpisz nr telefonu')]);
-    }
-
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(['data_class' => 'AppBundle\FooterHandler']);
     }
 
     public function getName() {

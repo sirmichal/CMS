@@ -35,6 +35,16 @@ class Footer
      */
     private $value;
 
+    /**
+     * Footer constructor.
+     * @param string $attr
+     * @param string $value
+     */
+    public function __construct($attr = null, $value = null)
+    {
+        $this->attr = $attr;
+        $this->value = $value;
+    }
 
     /**
      * Get id
