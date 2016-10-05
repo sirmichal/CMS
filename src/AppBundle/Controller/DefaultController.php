@@ -7,6 +7,7 @@ use AppBundle\Form\NewUserForm;
 use AppBundle\Form\FooterForm;
 use AppBundle\Form\FileUploadForm;
 use AppBundle\Entity\Media;
+use AppBundle\Service\FooterService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -116,18 +117,20 @@ class DefaultController extends Controller
      */
     public function footerAction(Request $request)
     {
-        $footerArray = $this->getDoctrine()->getRepository('AppBundle:Footer')->findAll();
-        $footerHandler = new FooterHandler($footerArray);
+        $footerHandler = $this->get("footer_handler");
+        $form = $footerHandler->createForm();
+//        $form->handleRequest($request);
         
-        $form = $this->createForm(FooterForm::class, $footerHandler);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $footerHandler = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $footerHandler->persistFooterData($em);
+        
 
-            return $this->redirectToRoute('footer');
-        }
+        
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $footerHandler = $form->getData();
+//            $em = $this->getDoctrine()->getManager();
+//            $footerHandler->persistFooterData($em);
+//
+//            return $this->redirectToRoute('footer');
+//        }
 
         return $this->render('footer.html.twig', array('form' => $form->createView()));
     }
