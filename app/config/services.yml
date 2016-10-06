@@ -9,4 +9,4 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     footer_handler:
         class: AppBundle\Service\FooterService
-        arguments: ['@form.factory', '@doctrine']
+        arguments: ['@form.factory', '@doctrine', '@session']

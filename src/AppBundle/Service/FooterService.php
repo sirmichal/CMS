@@ -4,11 +4,11 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Footer;
 use AppBundle\Form\FooterForm;
-use AppBundle\FooterHandler;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class FooterService
 {
@@ -22,6 +22,11 @@ class FooterService
      * @var Registry
      */
     private $doctrine;
+    
+    /**
+     * @var Session
+     */
+    private $session;
 
     /**
      * @var \AppBundle\Repository\FooterRepository
@@ -55,10 +60,11 @@ class FooterService
      * @param FormFactory $factoryForm
      * @param Registry $doctrine
      */
-    public function __construct(FormFactory $factoryForm, Registry $doctrine)
+    public function __construct(FormFactory $factoryForm, Registry $doctrine, Session $session)
     {
         $this->factoryForm = $factoryForm;
         $this->doctrine = $doctrine;
+        $this->session = $session;
         $this->repo = $this->doctrine->getManager()->getRepository('AppBundle:Footer');
     }
 
@@ -87,6 +93,7 @@ class FooterService
         $this->form->handleRequest($request);
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $this->saveDataToDb();
+            $this->session->getFlashBag()->add('success', 'Zaktualizowano dane');
         }
     }
 
