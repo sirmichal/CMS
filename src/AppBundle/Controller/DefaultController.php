@@ -2,12 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\FooterHandler;
-use AppBundle\Form\NewUserForm;
-use AppBundle\Form\FooterForm;
 use AppBundle\Form\FileUploadForm;
 use AppBundle\Entity\Media;
-use AppBundle\Service\FooterService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,26 +26,11 @@ class DefaultController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function usersAction(Request $request)
+    public function usersAction()
     {
-        $users = $this->getDoctrine()->getRepository('AppBundle:User')
-            ->createQueryBuilder('u')->getQuery()->getResult();
-
-        $form = $this->createForm(NewUserForm::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            
-            $this->addFlash('success', 'User created!');
-
-            return $this->redirectToRoute('users');
-        }
-
-
-        return $this->render('form.html.twig', array('users' => $users, 'form' => $form->createView()));
+        $userManager = $this->get('fos_user.user_manager');
+        $users = $userManager->findUsers();
+        return $this->render('form.html.twig', array('users' => $users));
     }
 
     /**
@@ -59,14 +40,9 @@ class DefaultController extends Controller
      */
     public function deleteAction($userId)
     {
-        $qb = $this->getDoctrine()->getRepository('AppBundle:User')->createQueryBuilder('u');
-
-
-        $qb->delete();
-        $qb->where('u.id = :id');
-        $qb->setParameter('id', $userId);
-        $qb->getQuery()->getResult();
-        
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('id' => $userId));
+        $userManager->deleteUser($user);
         $this->addFlash('delete', 'User deleted!');
 
         return $this->redirectToRoute('users');
