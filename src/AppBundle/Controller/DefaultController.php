@@ -87,25 +87,22 @@ class DefaultController extends Controller
      * @Route("media/delete", name="delete_media")
      */
     public function deleteMediaAction(Request $request) {
+        $json = $request->get('data');
+        $json = html_entity_decode($json);
+        $names = json_decode($json);
         
-        $content = $request->getContent();
-        if (!empty($content)) {
-            $files = json_decode($content, true);
-            $repo = $this->getDoctrine()->getManager()->getRepository('AppBundle:Media');
-            foreach ($files as $filename) {
-                $repo->findBy($criteria)
-            }
-
-
-
-            return new Response("OK");
+        $mediaRepo = $this->getDoctrine()->getRepository('AppBundle:Media');
+        $em = $this->getDoctrine()->getManager();
+        
+        foreach ($names as $name)
+        {
+            $file = $mediaRepo->findOneBy(array('name' => $name));
+            $em->remove($file);
+            $em->flush();
         }
 
-        return new Response("asdsad");
-        
+        return new Response('OK');
     }
-    
-    
     
 
     /**

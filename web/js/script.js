@@ -13,7 +13,8 @@ $("img.media-library-img").click(function () {
 });
 
 $("#btn-delete-img").click(function () {
-    $.post("delete", JSON.stringify(img_selected), function(data) {
+    
+    $.post("delete", {'data': JSON.stringify(img_selected)}, function(data) {
         if("OK" === data)
         {
             location.reload();

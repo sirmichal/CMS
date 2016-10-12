@@ -23,45 +23,30 @@ class Media {
     private $id;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
-     * 
+     * @Vich\UploadableField(mapping="media_upload", fileNameProperty="name")
      * @var File
      */
-    private $imageFile;
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      * @var string
      */
-    private $imageName;
+    private $name;
 
     /**
      * @ORM\Column(type="datetime")
-     *
      * @var \DateTime
      */
     private $updatedAt;
 
     /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
-     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @return Product
      */
-    public function setImageFile(File $image = null) {
-        $this->imageFile = $image;
-
-        if ($image) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
+    public function setFile(File $file = null) {
+        $this->file = $file;
+        if ($file) {
             $this->updatedAt = new \DateTime('now');
         }
         return $this;
@@ -70,26 +55,24 @@ class Media {
     /**
      * @return File|null
      */
-    public function getImageFile() {
-        return $this->imageFile;
+    public function getFile() {
+        return $this->file;
     }
 
     /**
-     * @param string $imageName
-     *
+     * @param string $name
      * @return Product
      */
-    public function setImageName($imageName) {
-        $this->imageName = $imageName;
-
+    public function setName($name) {
+        $this->name = $name;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getImageName() {
-        return $this->imageName;
+    public function getName() {
+        return $this->name;
     }
 
 }
