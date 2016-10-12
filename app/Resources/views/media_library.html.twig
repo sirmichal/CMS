@@ -6,17 +6,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                {% for file in files %}
-                    <img class="media-library-img" src="{{ asset('uploads/') ~ file.name}}">
-                {% endfor %}
-                <div class="row">
-                    <button class="btn btn-danger" id="btn-delete-img">Usuń obrazki</button>
-                </div>
-
-            </div>
-        </div>
+    <div class="row">
+        {% for file in files %}
+            <img class="media-library-img" src="{{ asset('uploads/') ~ file.name}}">
+        {% endfor %}
+    </div>
+    <div class="row">
+        <button class="btn btn-danger" id="btn-delete-img">Usuń obrazki</button>
     </div>
 {% endblock %}

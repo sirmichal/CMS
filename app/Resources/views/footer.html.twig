@@ -1,28 +1,24 @@
 {% extends "base.html.twig" %}
 {% block form_label_class -%}
     col-sm-4
-    {%- endblock form_label_class %}
+{%- endblock form_label_class %}
     
 {% block content %}
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                {% form_theme form 'bootstrap_3_layout.html.twig' %}
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <button type="submit" class="btn btn-default">Zapisz</button>
-                {{ form_end(form) }}
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    {% for msg in app.session.flashBag.get('success') %}
-                        <div class="alert alert-success fade in">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ msg }}
-                        </div>
-                    {% endfor %}
+    <div class="row">
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-default">Zapisz</button>
+        {{ form_end(form) }}
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            {% for msg in app.session.flashBag.get('success') %}
+                <div class="alert alert-success fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ msg }}
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
