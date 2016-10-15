@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +21,7 @@ class NewUserForm extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\User']);
+        $resolver->setDefaults(['data_class' => 'AdminBundle\Entity\User']);
     }
 
     public function getName()

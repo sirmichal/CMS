@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AdminBundle\Service;
 
-use AppBundle\Entity\Footer;
-use AppBundle\Form\FooterForm;
+use AdminBundle\Entity\Footer;
+use AdminBundle\Form\FooterForm;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -29,7 +29,7 @@ class FooterService
     private $session;
 
     /**
-     * @var \AppBundle\Repository\FooterRepository
+     * @var \AdminBundle\Repository\FooterRepository
      */
     private $repo;
 
@@ -65,7 +65,7 @@ class FooterService
         $this->factoryForm = $factoryForm;
         $this->doctrine = $doctrine;
         $this->session = $session;
-        $this->repo = $this->doctrine->getManager()->getRepository('AppBundle:Footer');
+        $this->repo = $this->doctrine->getManager()->getRepository('AdminBundle:Footer');
     }
 
     /**

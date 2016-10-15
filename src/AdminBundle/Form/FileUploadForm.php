@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ class FileUploadForm extends AbstractType {
     }
 
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Media']);
+        $resolver->setDefaults(['data_class' => 'AdminBundle\Entity\Media']);
     }
 
     public function getName() {

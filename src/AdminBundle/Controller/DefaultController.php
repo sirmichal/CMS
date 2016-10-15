@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AdminBundle\Controller;
 
-use AppBundle\Form\FileUploadForm;
-use AppBundle\Entity\Media;
+use AdminBundle\Form\FileUploadForm;
+use AdminBundle\Entity\Media;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ class DefaultController extends Controller
 {
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="admin_homepage")
      * @return Response
      */
     public function indexAction()
@@ -23,7 +23,6 @@ class DefaultController extends Controller
     
     /**
      * @Route("users", name="users")
-     * @param Request $request
      * @return Response
      */
     public function usersAction()
@@ -77,7 +76,7 @@ class DefaultController extends Controller
      * @Route("media/library", name="media_library")
      */
     public function mediaLibraryAction(Request $request) {
-        $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AppBundle:Media')->findAll();
+        $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
         
         return $this->render('media_library.html.twig', array('files' => $mediaFiles));
     }
@@ -91,7 +90,7 @@ class DefaultController extends Controller
         $json = html_entity_decode($json);
         $names = json_decode($json);
         
-        $mediaRepo = $this->getDoctrine()->getRepository('AppBundle:Media');
+        $mediaRepo = $this->getDoctrine()->getRepository('AdminBundle:Media');
         $em = $this->getDoctrine()->getManager();
         
         foreach ($names as $name)

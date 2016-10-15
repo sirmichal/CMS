@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Footer
  *
  * @ORM\Table(name="footer")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FooterRepository")
+ * @ORM\Entity(repositoryClass="AdminBundle\Repository\FooterRepository")
  */
 class Footer
 {
