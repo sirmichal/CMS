@@ -18,7 +18,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('home.html.twig');
+        return $this->render('AdminBundle::home.html.twig');
     }
     
     /**
@@ -29,7 +29,7 @@ class DefaultController extends Controller
     {
         $userManager = $this->get('fos_user.user_manager');
         $users = $userManager->findUsers();
-        return $this->render('form.html.twig', array('users' => $users));
+        return $this->render('AdminBundle::form.html.twig', array('users' => $users));
     }
 
     /**
@@ -48,14 +48,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("home", name="home")
-     */
-    public function homeAction()
-    {
-        return $this->render('home.html.twig');
-    }
-
-    /**
      * @Route("upload", name="upload")
      */
     public function uploadAction(Request $request)
@@ -69,16 +61,16 @@ class DefaultController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('media_library'));
         }
-        return $this->render('upload.html.twig', array('form' => $form->createView()));
+        return $this->render('AdminBundle::upload.html.twig', array('form' => $form->createView()));
     }
     
     /**
      * @Route("media/library", name="media_library")
      */
-    public function mediaLibraryAction(Request $request) {
+    public function mediaLibraryAction() {
         $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
         
-        return $this->render('media_library.html.twig', array('files' => $mediaFiles));
+        return $this->render('AdminBundle::media_library.html.twig', array('files' => $mediaFiles));
     }
     
 
@@ -115,7 +107,7 @@ class DefaultController extends Controller
         $form = $footerHandler->createForm();
         $footerHandler->submit($request);
 
-        return $this->render('footer.html.twig', array('form' => $form->createView()));
+        return $this->render('AdminBundle::footer.html.twig', array('form' => $form->createView()));
     }
 
 }

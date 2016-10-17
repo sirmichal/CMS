@@ -15,12 +15,12 @@
 
         {% block page %}
             {% block navbar %}
-                {% include 'navbar.html.twig' %}
+                {% include 'AdminBundle::navbar.html.twig' %}
             {% endblock %}
 
             <div class="content-with-sidebar">
                 {% block sidebar %}
-                    {% include 'sidebar.html.twig' %}
+                    {% include 'AdminBundle::sidebar.html.twig' %}
                 {% endblock %}
                 <div class="content">
                     <div class="container-fluid">

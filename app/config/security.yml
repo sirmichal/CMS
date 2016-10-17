@@ -10,9 +10,6 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
-
         fos_userbundle:
             id: fos_user.user_provider.username
 
@@ -39,7 +36,7 @@ security:
             anonymous:    true
             
     access_control:        
-#        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/admin/, role: ROLE_ADMIN }
