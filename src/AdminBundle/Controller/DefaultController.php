@@ -18,7 +18,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AdminBundle::home.html.twig');
+        return $this->render('AdminBundle:Default:home.html.twig');
     }
     
     /**
@@ -29,7 +29,7 @@ class DefaultController extends Controller
     {
         $userManager = $this->get('fos_user.user_manager');
         $users = $userManager->findUsers();
-        return $this->render('AdminBundle::form.html.twig', array('users' => $users));
+        return $this->render('AdminBundle:Default:users.html.twig', array('users' => $users));
     }
 
     /**
@@ -49,6 +49,8 @@ class DefaultController extends Controller
 
     /**
      * @Route("upload", name="upload")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function uploadAction(Request $request)
     {
@@ -61,7 +63,7 @@ class DefaultController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('media_library'));
         }
-        return $this->render('AdminBundle::upload.html.twig', array('form' => $form->createView()));
+        return $this->render('AdminBundle:Default:upload.html.twig', array('form' => $form->createView()));
     }
     
     /**
@@ -70,12 +72,14 @@ class DefaultController extends Controller
     public function mediaLibraryAction() {
         $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
         
-        return $this->render('AdminBundle::media_library.html.twig', array('files' => $mediaFiles));
+        return $this->render('AdminBundle:Default:media_library.html.twig', array('files' => $mediaFiles));
     }
-    
+
 
     /**
      * @Route("media/delete", name="delete_media")
+     * @param Request $request
+     * @return Response
      */
     public function deleteMediaAction(Request $request) {
         $json = $request->get('data');
@@ -107,7 +111,7 @@ class DefaultController extends Controller
         $form = $footerHandler->createForm();
         $footerHandler->submit($request);
 
-        return $this->render('AdminBundle::footer.html.twig', array('form' => $form->createView()));
+        return $this->render('AdminBundle:Default:footer.html.twig', array('form' => $form->createView()));
     }
 
 }
