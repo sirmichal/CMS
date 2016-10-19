@@ -45,6 +45,32 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("posts", name="show_posts")
+     * @return Response
+     */
+    public function showPostsAction() {
+        $posts = $this->getDoctrine()->getRepository('AdminBundle:Post')->findAll();
+        return $this->render('AdminBundle:Post:show.html.twig', array('posts' => $posts));
+    }
+
+    /**
+     * @Route("posts/{postId}", name="edit_post", requirements={"postId": "\d+"})
+     * @param Request $request
+     * @param $postId
+     * @return Response
+     */
+    public function editPostAction(Request $request, $postId) {
+        $post = $this->getDoctrine()->getRepository('AdminBundle:Post')->findOneById($postId);
+        $form = $this->createForm(NewPostForm::class, $post);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('show_posts');
+        }
+        return $this->render('AdminBundle:Post:add.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
      * @Route("users", name="users")
      * @return Response
      */
