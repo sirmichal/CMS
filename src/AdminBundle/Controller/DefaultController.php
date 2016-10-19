@@ -3,7 +3,9 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Form\FileUploadForm;
+use AdminBundle\Form\NewPostForm;
 use AdminBundle\Entity\Media;
+use AdminBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +15,7 @@ class DefaultController extends Controller
 {
 
     /**
-     * @Route("/", name="admin_homepage")
+     * @Route(name="admin_homepage")
      * @return Response
      */
     public function indexAction()
@@ -21,6 +23,27 @@ class DefaultController extends Controller
         return $this->render('AdminBundle:Default:home.html.twig');
     }
     
+    /**
+     * @Route("posts/new", name="add_new_post")
+     * @param Request $request
+     * @return Response
+     */
+    public function addNewPostAction(Request $request) {
+        $post = new Post();
+        $form = $this->createForm(NewPostForm::class, $post);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $post->setCreated(new \DateTime('now'));
+            $post->setUser($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+            return $this->redirectToRoute('add_new_post');
+        }
+
+        return $this->render('AdminBundle:Post:add.html.twig', array('form' => $form->createView()));
+    }
+
     /**
      * @Route("users", name="users")
      * @return Response

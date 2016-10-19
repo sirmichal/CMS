@@ -1,0 +1,20 @@
+{% extends 'AdminBundle::base.html.twig' %}
+{% block content %}
+
+{{ form_start(form) }}
+    <div class="form-group row">
+        {{ form_label(form.title, null, {'label_attr': {'class': 'col-xs-1 text-right'}}) }}
+        <div class="col-xs-6">
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.content, null, {'label_attr': {'class': 'col-xs-1 text-right'}}) }}
+        <div class="col-xs-6">
+            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'style': 'height:500px'}}) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+{{ form_end(form) }}
+
+{% endblock %}
