@@ -1,7 +1,7 @@
 {% extends 'AdminBundle::base.html.twig' %}
 {% block content %}
 
-    <table class="table table-striped table-condensed">
+    <table class="table table-striped table-hover">
         <thead>
         <tr>
             <th>Tytuł</th>
@@ -13,11 +13,10 @@
         <tbody>
         {% for post in posts %}
             <tr>
-                <td>{{ post.title }}</td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.user }}</td>
-                <td>{{ post.created|date("d-M-Y H:i") }}</td>
-                <td><a href={{ path('edit_post', {'postId': post.id}) }}>Edytuj</a></td>
+                <td class="edit-post-row">{{ post.title }}<br><a href={{ path('edit_post', {'postId': post.id}) }}>Edytuj</a><a href={{ path('edit_post', {'postId': post.id}) }}>Usuń</a></td>
+                <td class="edit-post-row">{{ post.content }}</td>
+                <td class="edit-post-row">{{ post.user }}</td>
+                <td class="edit-post-row">{{ post.created|date("d-M-Y H:i") }}</td>
             </tr>
         {% endfor %}
 
