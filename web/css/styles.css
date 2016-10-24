@@ -26,6 +26,12 @@
     float: right;
 }
 
+.add-post-img-selected {
+    border: 5px solid;
+    border-color: black;
+}
+
+
 @media (max-width: 768px) {
     .sidebar {
         display: none;

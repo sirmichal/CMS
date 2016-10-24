@@ -8,7 +8,7 @@
 {% block content %}
     <div class="row">
         {% for file in files %}
-            <img class="media-library-img" src="{{ (asset('media/') ~ file.name) | imagine_filter('thumbnails') }}">
+            <img class="media-library-img" src="{{ (asset('media/') ~ file.name) | imagine_filter('thumbnails_large') }}">
         {% endfor %}
     </div>
     <div class="row">

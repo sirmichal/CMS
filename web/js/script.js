@@ -25,3 +25,31 @@ $("#btn-delete-img").click(function () {
 var extract = function (str) {
     return str.split('\\').pop().split('/').pop();
 }
+
+$(".add-post-img").click(function () {
+    $(this).siblings().removeClass("add-post-img-selected");
+    if($(this).hasClass('add-post-img-selected')) {
+        $(this).removeClass("add-post-img-selected");
+        $("#add-post-select-img-btn").attr("disabled", true);
+    } else {
+        $(this).addClass("add-post-img-selected");
+        $("#add-post-select-img-btn").attr("disabled", false);
+    }
+});
+
+
+$("#showImagesModal").on('hide.bs.modal', function () {
+    var thumbSrc = null;
+    var thumbId = null;
+
+    $(".add-post-img").each(function () {
+        if($(this).hasClass("add-post-img-selected")) {
+            thumbSrc = $(this).attr("src");
+            thumbId = $(this).attr("data-id");
+        }
+    });
+
+    $('#thumbnailIdField').val(thumbId);
+    $('#post-thumb-img').attr("src", thumbSrc);
+});
+

@@ -11,9 +11,36 @@
     <div class="form-group row">
         {{ form_label(form.content, null, {'label_attr': {'class': 'col-xs-1 text-right'}}) }}
         <div class="col-xs-6">
-            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'style': 'height:500px'}}) }}
+            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'style': 'height:300px'}}) }}
         </div>
     </div>
+
+    <div class="form-group row">
+        <div class="col-xs-6">
+            {{ form_widget(form.thumbId, {'id': 'thumbnailIdField'}) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <img id="post-thumb-img">
+    </div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showImagesModal">Wybierz obrazek</button>
+    <div id="showImagesModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {% for image in images %}
+                        <img class="add-post-img" data-id={{ image.id }} src={{ (asset('media/') ~ image.name) | imagine_filter('thumbnails_medium') }}>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" disabled="true" class="btn btn-primary disable-btn" id="add-post-select-img-btn" data-dismiss="modal">Wybierz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Zapisz</button>
 {{ form_end(form) }}
 

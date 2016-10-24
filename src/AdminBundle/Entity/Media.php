@@ -75,4 +75,12 @@ class Media {
         return $this->name;
     }
 
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }

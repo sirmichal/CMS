@@ -98,7 +98,7 @@ liip_imagine:
         # use the default cache configuration
         cache: ~
         # the name of the "filter set"
-        thumbnails:
+        thumbnails_large:
             # adjust the image quality to 75%
             quality: 75
             # list of transformations to apply (the "filters")
@@ -109,4 +109,12 @@ liip_imagine:
                 # create a 2px black border: center the thumbnail on a black background
                 # 4px larger to create a 2px border around the final image
                 # background: { size: [124, 94], position: center, color: '#000000' }
+        thumbnails_medium:
+            quality: 75
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+        thumbnails_small:
+            quality: 75
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
 

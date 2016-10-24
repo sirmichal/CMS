@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class NewPostForm extends AbstractType {
 
@@ -18,6 +19,9 @@ class NewPostForm extends AbstractType {
         $builder->add('content', TextareaType::class, [
             'label' => 'Treść:',
             'attr' => array('placeholder' => 'Wpisz treść')]);
+
+        $builder->add('thumbId', HiddenType::class, array(
+            'mapped' => false, 'label' => false));
     }
 
     public function configureOptions(OptionsResolver $resolver) {

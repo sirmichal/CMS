@@ -32,16 +32,24 @@ class DefaultController extends Controller
         $post = new Post();
         $form = $this->createForm(NewPostForm::class, $post);
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()) {
+            $thumbnailId = $form->get('thumbId')->getData();
+            $thumbnail = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($thumbnailId);
+
+            $post->setThumbnail($thumbnail);
             $post->setCreated(new \DateTime('now'));
             $post->setUser($this->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
             return $this->redirectToRoute('add_new_post');
         }
+        
+        $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
 
-        return $this->render('AdminBundle:Post:add.html.twig', array('form' => $form->createView()));
+        return $this->render('AdminBundle:Post:add.html.twig', array('form' => $form->createView(), 'images' => $mediaFiles));
     }
 
     /**
@@ -143,6 +151,9 @@ class DefaultController extends Controller
             $file = $mediaRepo->findOneBy(array('name' => $name));
             $em->remove($file);
             $em->flush();
+            
+            $cacheMngr = $this->get('liip_imagine.cache.manager');
+            $cacheMngr->remove('media/' . $name);
         }
 
         return new Response('OK');
