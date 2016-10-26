@@ -2,16 +2,31 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/media_library.css') }}">
+    {#<link rel="stylesheet" type="text/css" href="{{ asset('css/media_library.css') }}">#}
 {% endblock %}
 
 {% block content %}
     <div class="row">
         {% for file in files %}
-            <img class="media-library-img" src="{{ (asset('media/') ~ file.name) | imagine_filter('thumbnails_large') }}">
+            <img class="media-library-img" data-toggle="modal" data-target="#single-img-modal" data-id={{ file.id }}
+                 src="{{ (asset('media/') ~ file.name) | imagine_filter('thumbnails_large') }}">
         {% endfor %}
     </div>
-    <div class="row">
-        <button class="btn btn-danger" id="btn-delete-img">Usuń obrazki</button>
+
+    {#<div class="row">#}
+        {#<button class="btn btn-danger" id="btn-delete-img">Usuń obrazki</button>#}
+    {#</div>#}
+
+
+
+    <div id="single-img-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img id="single-img">
+                </div>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

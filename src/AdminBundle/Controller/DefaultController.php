@@ -210,12 +210,13 @@ class DefaultController extends Controller
     /**
      * @param Request $request
      * @return Response
-     * @Route("getThumbSrc", name="get_thumb_ajax")
+     * @Route("getMediaSrc", name="get_media_src_ajax")
      */
-    public function getThumbSrcAction(Request $request) {
+    public function getMediaSrcAction(Request $request) {
         $id = $request->query->get('id');
         $filter = $request->query->get('filter');
 
+        /** @var Media $media */
         $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
         $mediaName = $media->getName();
         

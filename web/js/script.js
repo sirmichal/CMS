@@ -1,15 +1,24 @@
 var img_selected = [];
 
-$("img.media-library-img").click(function () {
-    $(this).toggleClass("media-library-selected");
-    var filename = extract($(this).attr("src"));
-    var index = img_selected.indexOf(filename);
-    if (-1 === index) {
-        img_selected.push(filename);
-    } else {
-        img_selected.splice(index, 1);
-    }
+// $("img.media-library-img").click(function () {
+//     $(this).toggleClass("media-library-selected");
+//     var filename = extract($(this).attr("src"));
+//     var index = img_selected.indexOf(filename);
+//     if (-1 === index) {
+//         img_selected.push(filename);
+//     } else {
+//         img_selected.splice(index, 1);
+//     }
+// });
 
+
+$("#single-img-modal").on('show.bs.modal', function (e) {
+    var invoker = $(e.relatedTarget);
+    var mediaId = invoker.attr('data-id');
+
+    $.get('../getMediaSrc', {id: mediaId, filter: 'thumbnails_small'}, function (src) {
+        $('#single-img').attr('src', src);
+    });
 });
 
 $("#btn-delete-img").click(function () {
@@ -49,7 +58,7 @@ $("#showImagesModal").on('hide.bs.modal', function () {
 
     $('#thumbnailIdField').val(mediaId);
     
-    $.get('../getThumbSrc', {id: mediaId, filter: 'thumbnails_large'}, function (src) {
+    $.get('../getMediaSrc', {id: mediaId, filter: 'thumbnails_large'}, function (src) {
         $('#post-thumb-img').attr("src", src);
     });
 });
