@@ -1,7 +1,13 @@
 {% extends 'AdminBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.css"/>
+{% endblock %}
+
 {% block content %}
 
-    <table class="table table-striped table-hover">
+    <table id="show-posts-table" class="table table-striped table-hover">
         <thead>
         <tr>
             <th>Tytuł</th>
@@ -13,7 +19,9 @@
         <tbody>
         {% for post in posts %}
             <tr>
-                <td class="edit-post-row">{{ post.title }}<br><a href={{ path('edit_post', {'postId': post.id}) }}>Edytuj</a><a href={{ path('edit_post', {'postId': post.id}) }}>Usuń</a></td>
+                <td class="edit-post-row">{{ post.title }}<br>
+                    <a href={{ path('edit_post', {'postId': post.id}) }}>Edytuj</a>
+                    <a href={{ path('delete_post', {'postId': post.id}) }}>Usuń</a></td>
                 <td class="edit-post-row">{{ post.content }}</td>
                 <td class="edit-post-row">{{ post.user }}</td>
                 <td class="edit-post-row">{{ post.created|date("d-M-Y H:i") }}</td>
@@ -24,3 +32,9 @@
     </table>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.js"></script>
+{% endblock %}
+

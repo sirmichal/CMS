@@ -172,7 +172,7 @@ class Post
      *
      * @return Post
      */
-    public function setThumbnail(Media $thumbnail)
+    public function setThumbnail(Media $thumbnail = null)
     {
         $this->thumbnail = $thumbnail;
 
