@@ -55,7 +55,7 @@ $("#showImagesModal").on('hide.bs.modal', function () {
 });
 
 
-$('.edit-post-row').hover(
+$('.edit-row').hover(
         function () {
             $(this).find('a').css('visibility', 'visible');
         },
