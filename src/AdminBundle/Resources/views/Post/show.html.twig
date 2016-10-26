@@ -18,13 +18,13 @@
         </thead>
         <tbody>
         {% for post in posts %}
-            <tr>
-                <td class="edit-post-row">{{ post.title }}<br>
+            <tr class="edit-post-row">
+                <td>{{ post.title }}<br>
                     <a href={{ path('edit_post', {'postId': post.id}) }}>Edytuj</a>
                     <a href={{ path('delete_post', {'postId': post.id}) }}>Usuń</a></td>
-                <td class="edit-post-row">{{ post.content }}</td>
-                <td class="edit-post-row">{{ post.user }}</td>
-                <td class="edit-post-row">{{ post.created|date("d-M-Y H:i") }}</td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.user }}</td>
+                <td>{{ post.created|date("d-M-Y H:i") }}</td>
             </tr>
         {% endfor %}
 

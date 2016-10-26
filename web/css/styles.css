@@ -31,6 +31,14 @@
     border-color: black;
 }
 
+#post-thumb-img {
+    margin-top: 100px;
+}
+
+.edit-post-row a {
+    visibility: hidden;
+    margin-right: 10px;
+}
 
 @media (max-width: 768px) {
     .sidebar {

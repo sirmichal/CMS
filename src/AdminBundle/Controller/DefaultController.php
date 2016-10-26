@@ -89,7 +89,12 @@ class DefaultController extends Controller
         $form = $this->createForm(NewPostForm::class, $post);
         
         $thumbnail = $post->getThumbnail();
+        if($thumbnail != null) {
+            $form->get('thumbId')->setData($thumbnail->getId());
+        }
+
         $form->handleRequest($request);
+
         if ($form->isValid()) {
             $thumbnailId = $form->get('thumbId')->getData();
             $thumbnail = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($thumbnailId);
@@ -200,6 +205,24 @@ class DefaultController extends Controller
         $footerHandler->submit($request);
 
         return $this->render('AdminBundle:Default:footer.html.twig', array('form' => $form->createView()));
+    }
+    
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("getThumbSrc", name="get_thumb_ajax")
+     */
+    public function getThumbSrcAction(Request $request) {
+        $id = $request->query->get('id');
+        $filter = $request->query->get('filter');
+
+        $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
+        $mediaName = $media->getName();
+        
+        $imagineCacheManager = $this->get('liip_imagine.cache.manager');
+        $resolvedPath = $imagineCacheManager->getBrowserPath('media/' . $mediaName, $filter);
+        
+        return new Response($resolvedPath);
     }
 
 }
