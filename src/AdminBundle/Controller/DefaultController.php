@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
 
 class DefaultController extends Controller
 {
@@ -151,6 +154,19 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($media);
             $em->flush();
+            
+            $kernel = $this->get('kernel');
+            $application = new Application($kernel);
+            $application->setAutoExit(false);
+
+            $input = new ArrayInput(array(
+                'command' => 'liip:imagine:cache:resolve',
+                'paths' => array('media/' . $media->getName())
+            ));
+
+            $output = new NullOutput();
+            $application->run($input, $output);
+
             return $this->redirect($this->generateUrl('media_library'));
         }
         return $this->render('AdminBundle:Default:upload.html.twig', array('form' => $form->createView()));
@@ -225,5 +241,5 @@ class DefaultController extends Controller
         
         return new Response($resolvedPath);
     }
-
+    
 }

@@ -13,17 +13,14 @@
         {% endfor %}
     </div>
 
-    {#<div class="row">#}
-        {#<button class="btn btn-danger" id="btn-delete-img">Usuń obrazki</button>#}
-    {#</div>#}
-
-
-
     <div id="single-img-modal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <img id="single-img">
+                    <div>
+                        <a id="href={{ path('delete_media') }}>Usuń</a>
+                    </div>
                 </div>
             </div>
         </div>
