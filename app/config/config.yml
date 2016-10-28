@@ -108,4 +108,4 @@ liip_imagine:
 
 # FOSJsRoutingBundle Configuration
 fos_js_routing:
-    routes_to_expose: ['delete_media', 'get_media_src_ajax']
+    routes_to_expose: ['get_modal']

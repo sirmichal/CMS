@@ -214,24 +214,23 @@ class DefaultController extends Controller
 
         return $this->render('AdminBundle:Default:footer.html.twig', array('form' => $form->createView()));
     }
-    
+
     /**
      * @param Request $request
      * @return Response
-     * @Route("getMediaSrc", name="get_media_src_ajax")
+     * @Route("getModal", name="get_modal")
      */
-    public function getMediaSrcAction(Request $request) {
+    public function getModalAction(Request $request) {
         $id = $request->query->get('id');
-        $filter = $request->query->get('filter');
-
+        
         /** @var Media $media */
         $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
-        $mediaName = $media->getName();
         
         $imagineCacheManager = $this->get('liip_imagine.cache.manager');
-        $resolvedPath = $imagineCacheManager->getBrowserPath('media/' . $mediaName, $filter);
+        $resolvedPath = $imagineCacheManager->getBrowserPath('media/' . $media->getName(), 'single_image');
         
-        return new Response($resolvedPath);
+        $view = $this->renderView('AdminBundle:Default:modal.html.twig', array('media' => $media, 'preview_path' => $resolvedPath));
+        return new Response($view);
     }
-    
+
 }

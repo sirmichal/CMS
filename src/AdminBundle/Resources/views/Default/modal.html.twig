@@ -1,0 +1,16 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-10">
+                    <img class="img-responsive" id="single-img" src={{ preview_path }}>
+                </div>
+                <div class="col-md-2">
+                    <p><b>Rozmiar:</b> {{ media.filesize }}</p>
+                    <p><b>Typ:</b> {{ media.mimetype }}</p>
+                    <a href={{ path('delete_media', {mediaId: media.id})}}>Usuń</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

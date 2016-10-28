@@ -2,9 +2,8 @@ $("#single-img-modal").on('show.bs.modal', function (e) {
     var invoker = $(e.relatedTarget);
     var id = invoker.attr('data-id');
 
-    $.get(Routing.generate('get_media_src_ajax'), {id: id, filter: 'single_image'}, function (src) {
-        $('#single-img').attr('src', src);
-        $('#delete-media-link').attr('href', Routing.generate('delete_media', {mediaId: id}));
+    $.get(Routing.generate('get_modal'), {id: id}, function (view) {
+        $('#single-img-modal').html(view);
     });
 });
 
