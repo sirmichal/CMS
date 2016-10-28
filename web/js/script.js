@@ -1,11 +1,10 @@
 $("#single-img-modal").on('show.bs.modal', function (e) {
     var invoker = $(e.relatedTarget);
-    var mediaId = invoker.attr('data-id');
-    
-    $
+    var id = invoker.attr('data-id');
 
-    $.get('../getMediaSrc', {id: mediaId, filter: 'single_image'}, function (src) {
+    $.get(Routing.generate('get_media_src_ajax'), {id: id, filter: 'single_image'}, function (src) {
         $('#single-img').attr('src', src);
+        $('#delete-media-link').attr('href', Routing.generate('delete_media', {mediaId: id}));
     });
 });
 

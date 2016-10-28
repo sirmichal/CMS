@@ -2,7 +2,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {#<link rel="stylesheet" type="text/css" href="{{ asset('css/media_library.css') }}">#}
 {% endblock %}
 
 {% block content %}
@@ -17,9 +16,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <img id="single-img">
-                    <div>
-                        <a id="href={{ path('delete_media') }}>Usuń</a>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <img class="img-responsive" id="single-img">
+                        </div>
+                        <div class="col-md-2">
+                            <a id="delete-media-link">Usuń</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -27,3 +30,10 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+{% endblock %}
+

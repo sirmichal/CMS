@@ -183,29 +183,21 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("media/delete", name="delete_media")
-     * @param Request $request
+     * @Route("media/delete/{mediaId}", name="delete_media", requirements={"mediaId": "\d+"})
      * @return Response
      */
-    public function deleteMediaAction(Request $request) {
-        $json = $request->get('data');
-        $json = html_entity_decode($json);
-        $names = json_decode($json);
-        
+    public function deleteMediaAction($mediaId) {
         $mediaRepo = $this->getDoctrine()->getRepository('AdminBundle:Media');
-        $em = $this->getDoctrine()->getManager();
+        $media = $mediaRepo->findOneById($mediaId);
         
-        foreach ($names as $name)
-        {
-            $file = $mediaRepo->findOneBy(array('name' => $name));
-            $em->remove($file);
-            $em->flush();
-            
-            $cacheMngr = $this->get('liip_imagine.cache.manager');
-            $cacheMngr->remove('media/' . $name);
-        }
+        $cacheMngr = $this->get('liip_imagine.cache.manager');
+        $cacheMngr->remove('media/' . $media->getName());
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($media);
+        $em->flush();
 
-        return new Response('OK');
+        return $this->redirectToRoute('media_library');
     }
     
 
