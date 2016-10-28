@@ -6,8 +6,9 @@
                     <img class="img-responsive" id="single-img" src={{ preview_path }}>
                 </div>
                 <div class="col-md-2">
-                    <p><b>Rozmiar:</b> {{ media.filesize }}</p>
-                    <p><b>Typ:</b> {{ media.mimetype }}</p>
+                    <p><b>Wielkość:</b> {{ info.width }} x {{ info.height }}</p>
+                    <p><b>Rozmiar:</b> {{ info.size }}</p>
+                    <p><b>Typ:</b> {{ info.mime }}</p>
                     <a href={{ path('delete_media', {mediaId: media.id})}}>Usuń</a>
                 </div>
             </div>

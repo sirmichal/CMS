@@ -10,9 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 
 class DefaultController extends Controller
 {
@@ -154,18 +151,6 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($media);
             $em->flush();
-            
-            $kernel = $this->get('kernel');
-            $application = new Application($kernel);
-            $application->setAutoExit(false);
-
-            $input = new ArrayInput(array(
-                'command' => 'liip:imagine:cache:resolve',
-                'paths' => array('media/' . $media->getName())
-            ));
-
-            $output = new NullOutput();
-            $application->run($input, $output);
 
             return $this->redirect($this->generateUrl('media_library'));
         }
@@ -180,7 +165,6 @@ class DefaultController extends Controller
         
         return $this->render('AdminBundle:Default:media_library.html.twig', array('files' => $mediaFiles));
     }
-
 
     /**
      * @Route("media/delete/{mediaId}", name="delete_media", requirements={"mediaId": "\d+"})
@@ -199,7 +183,6 @@ class DefaultController extends Controller
 
         return $this->redirectToRoute('media_library');
     }
-    
 
     /**
      * @param Request $request
@@ -227,9 +210,19 @@ class DefaultController extends Controller
         $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
         
         $imagineCacheManager = $this->get('liip_imagine.cache.manager');
-        $resolvedPath = $imagineCacheManager->getBrowserPath('media/' . $media->getName(), 'single_image');
+        $preview_path = $imagineCacheManager->getBrowserPath('media/' . $media->getName(), 'single_image');
         
-        $view = $this->renderView('AdminBundle:Default:modal.html.twig', array('media' => $media, 'preview_path' => $resolvedPath));
+        $rawInfo = getimagesize('media/' . $media->getName());
+        $info['width'] = $rawInfo[0];
+        $info['height'] = $rawInfo[1];
+        $info['mime'] = $rawInfo['mime'];
+        $info['size'] = filesize('media/' . $media->getName());
+
+        $view = $this->renderView('AdminBundle:Default:modal.html.twig',
+                array(
+                    'media'         => $media,
+                    'info'          => $info,
+                    'preview_path'  => $preview_path));
         return new Response($view);
     }
 

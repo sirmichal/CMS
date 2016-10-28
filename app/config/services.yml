@@ -9,6 +9,7 @@ services:
         arguments: ['@form.factory', '@doctrine', '@session']
 
     media_listener:
-        class: AdminBundle\Service\MediaListener
+        class: AdminBundle\Service\MediaListenerService
+        arguments: ['@kernel']
         tags:
             - { name: kernel.event_subscriber }
