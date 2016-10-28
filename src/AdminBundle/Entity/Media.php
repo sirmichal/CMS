@@ -11,6 +11,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\MediaRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @Vich\Uploadable
  */
 class Media {
@@ -39,6 +40,19 @@ class Media {
      * @var \DateTime
      */
     private $updatedAt;
+    
+    
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $fileSize;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $mimeType;
 
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
@@ -81,6 +95,38 @@ class Media {
     public function getId()
     {
         return $this->id;
+    }
+    
+     /**
+     * @return integer
+     */
+    public function getFileSize()
+    {
+        return $this->fileSize;
+    }
+
+    /**
+     * @param integer $fileSize
+     */
+    public function setFileSize($fileSize)
+    {
+        $this->fileSize = $fileSize;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * @param string $mimeType
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
     }
 
 }

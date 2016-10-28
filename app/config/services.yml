@@ -4,9 +4,11 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AdminBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     footer_handler:
         class: AdminBundle\Service\FooterService
         arguments: ['@form.factory', '@doctrine', '@session']
+
+    media_listener:
+        class: AdminBundle\Service\MediaListener
+        tags:
+            - { name: kernel.event_subscriber }
