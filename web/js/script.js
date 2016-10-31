@@ -7,7 +7,15 @@ $("#single-img-modal").on('show.bs.modal', function (e) {
     });
 });
 
-$(".add-post-img").click(function () {
+$("#all-img-modal").on('show.bs.modal', function () {
+    var modal = $(this);
+    $.get(Routing.generate('modal_post'), null, function (view) {
+        modal.html(view);
+    });
+});
+
+
+$("#all-img-modal").on('click', '.add-post-img', function () {
     $(this).siblings().removeClass("add-post-img-selected");
     if($(this).hasClass('add-post-img-selected')) {
         $(this).removeClass("add-post-img-selected");
@@ -19,7 +27,7 @@ $(".add-post-img").click(function () {
 });
 
 
-$("#showImagesModal").on('hide.bs.modal', function () {
+$("#all-img-modal").on('hide.bs.modal', function () {
     var mediaId = null;
 
     $(".add-post-img").each(function () {
@@ -28,9 +36,9 @@ $("#showImagesModal").on('hide.bs.modal', function () {
         }
     });
 
-    $('#thumbnailIdField').val(mediaId);
-    
-    $.get('../getMediaSrc', {id: mediaId, filter: 'thumbnails_large'}, function (src) {
+    $('#thumbnail-field').val(mediaId);
+
+    $.get(Routing.generate('get_media_specific_cache'), {id: mediaId, filter: 'thumbnails_large'}, function (src) {
         $('#post-thumb-img').attr("src", src);
     });
 });

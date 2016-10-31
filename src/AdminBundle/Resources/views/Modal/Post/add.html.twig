@@ -1,0 +1,12 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            {% for m in media %}
+                <img class="add-post-img" data-id={{ m.id }} src={{ (asset('media/') ~ m.name) | imagine_filter('thumbnails_medium') }}>
+            {% endfor %}
+        </div>
+        <div class="modal-footer">
+            <button type="button" disabled="true" class="btn btn-primary disable-btn" id="add-post-select-img-btn" data-dismiss="modal">Wybierz</button>
+        </div>
+    </div>
+</div>

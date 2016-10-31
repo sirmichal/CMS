@@ -21,24 +21,13 @@
 
                 <div class="form-group row">
                     <div class="col-xs-12">
-                        {{ form_widget(form.thumbId, {'id': 'thumbnailIdField'}) }}
+                        {{ form_widget(form.thumbId, {'id': 'thumbnail-field'}) }}
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showImagesModal">Wybierz obrazek</button>
-                <div id="showImagesModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                {% for image in images %}
-                                    <img class="add-post-img" data-id={{ image.id }} src={{ (asset('media/') ~ image.name) | imagine_filter('thumbnails_medium') }}>
-                                {% endfor %}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" disabled="true" class="btn btn-primary disable-btn" id="add-post-select-img-btn" data-dismiss="modal">Wybierz</button>
-                            </div>
-                        </div>
-                    </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#all-img-modal">Wybierz obrazek</button>
+                <div id="all-img-modal" class="modal fade" role="dialog">
+
                 </div>
 
                 <button type="submit" class="btn btn-primary">Zapisz</button>
@@ -56,4 +45,10 @@
             </div>
     </div>
             
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 {% endblock %}

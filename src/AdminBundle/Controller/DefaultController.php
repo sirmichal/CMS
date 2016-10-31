@@ -218,12 +218,41 @@ class DefaultController extends Controller
         $info['mime'] = $rawInfo['mime'];
         $info['size'] = filesize('media/' . $media->getName());
 
-        $view = $this->renderView('AdminBundle:Default:modal.html.twig',
+        $view = $this->renderView('AdminBundle:Modal/Media:library.html.twig',
                 array(
                     'media'         => $media,
                     'info'          => $info,
                     'preview_path'  => $preview_path));
         return new Response($view);
+    }
+
+    /**
+     * @return Response
+     * @Route("modal/post", name="modal_post")
+     */
+    public function modalPostAction() {
+        $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
+        $view = $this->renderView('AdminBundle:Modal/Post:add.html.twig',
+            array(
+                'media'         => $media));
+        return new Response($view);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("media/cache", name="get_media_specific_cache")
+     */
+    public function getMediaSpecificCacheAction(Request $request) {
+        $id = $request->query->get('id');
+        $filter = $request->query->get('filter');
+
+        $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
+
+        $imagineCacheManager = $this->get('liip_imagine.cache.manager');
+        $preview_path = $imagineCacheManager->getBrowserPath('media/' . $media->getName(), $filter);
+
+        return new Response($preview_path);
     }
 
 }
