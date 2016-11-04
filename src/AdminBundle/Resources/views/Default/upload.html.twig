@@ -1,12 +1,30 @@
 {% extends 'AdminBundle::base.html.twig' %}
+{% form_theme form _self %}
 
+{% block file_label %}
+    {% spaceless %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% set label = '<img src=' ~ asset('assets/img/upload.png') ~ '/>' %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|raw }}</label>
+    {% endspaceless %}
+{% endblock %}
+        
 {% block content %}
     <div class="row">
-
         {{ form_start(form) }}
-        {{ form_widget(form.file, { 'attr': {'class': 'btn btn-default'} }) }}
-        <button type="submit" class="btn btn-default">Wyślij</button>
+        {{ form_row(form.file) }}
+        <div id="filename-upload"></div>
+        <button type="submit" class="btn btn-primary">Wyślij</button> 
         {{ form_end(form) }}
-
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin/upload.css') }}">
 {% endblock %}

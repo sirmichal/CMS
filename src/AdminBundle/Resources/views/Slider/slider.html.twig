@@ -1,0 +1,20 @@
+{% extends 'AdminBundle:Slider:base.html.twig' %}
+{% block content %}
+
+    <div class="row">
+        {% for m in media %}
+            <img class="slider-img" data-id={{ m.id }} src="{{ (asset('media/') ~ m.name) | imagine_filter('thumbnails_large') }}">
+        {% endfor %}
+    </div>
+    
+    <div class="row">
+        {% for s in slider %}
+            <img class="slider-img slider-img-selected" data-id={{ s.media.id }} src="{{ (asset('media/') ~ s.media.name) | imagine_filter('thumbnails_large') }}">
+        {% endfor %}
+    </div>
+    
+    <div class="row">
+        <button class="btn btn-default" id="slider-submit-btn">dfsgdsfg</button>
+    </div>
+
+{% endblock %}
