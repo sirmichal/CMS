@@ -3,8 +3,10 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use AdminBundle\Entity\Slider;
 
 /**
  * Media
@@ -40,7 +42,16 @@ class Media {
      * @var \DateTime
      */
     private $updatedAt;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Slider", mappedBy="media")
+     */
+    private $sliders;
 
+    public function __construct() {
+        $this->sliders = new ArrayCollection();
+    }
+    
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
      * @return Product

@@ -1,0 +1,12 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            {% for m in media %}
+                <img class="slider-img" data-id={{ m.id }} src={{ (asset('media/') ~ m.name) | imagine_filter('thumbnails_medium') }}>
+            {% endfor %}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="add-img-modal-btn" data-dismiss="modal">Zapisz</button>
+        </div>
+    </div>
+</div>

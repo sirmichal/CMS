@@ -25,7 +25,7 @@ class Slider
     /**
      * @var Media
      *
-     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="sliders")
      */
     private $media;
 
