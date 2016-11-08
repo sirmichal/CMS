@@ -4,7 +4,6 @@
     <div class="row">
         <div class="col-xs-7">
 
-    
             {{ form_start(form) }}
                 <div class="form-group row">
                     {{ form_label(form.title, null, {'label_attr': {'class': 'col-xs-1 text-right'}}) }}
@@ -25,30 +24,28 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#all-img-modal">Wybierz obrazek</button>
-                <div id="all-img-modal" class="modal fade" role="dialog">
-
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-img-modal">Wybierz obrazek</button>
+                <div id="add-img-modal" class="modal fade" role="dialog">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Zapisz</button>
             {{ form_end(form) }}
             
-            
         </div>
-            
-            <div class="col-xs-5">
-                {% if thumb is defined and thumb is not null %}
-                    <img id="post-thumb-img" class="center-block" src={{ (asset('media/') ~ thumb.name) | imagine_filter('thumbnails_large') }}>
-                {% else %}
-                    <img id="post-thumb-img" class="center-block">
-                {% endif %}
-            </div>
+        <div class="col-xs-5">
+            {% if thumb is defined and thumb is not null %}
+                <img id="post-thumb-img" class="center-block" src={{ (asset('media/') ~ thumb.name) | imagine_filter('thumbnails_large') }}>
+            {% else %}
+                <img id="post-thumb-img" class="center-block">
+            {% endif %}
+        </div>
     </div>
             
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/admin/posts.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 {% endblock %}

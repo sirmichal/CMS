@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <table id="show-posts-table" class="table table-striped table-hover">
+    <table id="posts-table" class="table table-striped table-hover">
         <thead>
         <tr>
             <th>Tytuł</th>
@@ -20,8 +20,8 @@
         {% for post in posts %}
             <tr class="edit-row">
                 <td>{{ post.title }}<br>
-                    <a href={{ path('edit_post', {'postId': post.id}) }}>Edytuj</a>
-                    <a href={{ path('delete_post', {'postId': post.id}) }}>Usuń</a></td>
+                    <a href={{ path('posts_edit', {'id': post.id}) }}>Edytuj</a>
+                    <a href={{ path('posts_delete', {'id': post.id}) }}>Usuń</a></td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.user }}</td>
                 <td>{{ post.created|date("d-M-Y H:i") }}</td>
@@ -35,6 +35,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/admin/posts.js') }}"></script>
+    <script src="{{ asset('js/admin/datatable/posts.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.js"></script>
 {% endblock %}
 
