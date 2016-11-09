@@ -60,3 +60,11 @@ body {
         padding-left: 0px;
     }
 }
+
+#top-slider .bx-viewport {
+    border: 0px !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    left: 0px !important;
+}

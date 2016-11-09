@@ -6,26 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>CMS</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+        <link rel="stylesheet" href={{ asset('css/bootstrap.css') }}>
+        <link rel="stylesheet" href={{ asset('css/styles.css') }}>
+        <link rel="stylesheet" href={{ asset('css/navbar.css') }}>
+        <link rel="stylesheet" href={{ asset('css/jquery.bxslider.css') }}>
     {% endblock %}
+    <script src={{ asset('js/jquery-3.1.0.js') }}></script>
 </head>
 <body>
 
 {% block page %}
 
-    <p>{{ street }}</p>
+{#    <p>{{ street }}</p>
     <p>{{ city }}</p>
     <p>{{ phone_number }}</p>
-    <p>{{ postal_code }}</p>
+    <p>{{ postal_code }}</p>#}
+    
+    <div id="top-slider">
+        <ul class="bxslider">
+            {% for s in sliders %}
+                <li><img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/></li>
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/jquery-3.1.0.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src={{ asset('js/bootstrap.js') }}></script>
+    <script src={{ asset('js/script.js') }}></script>
+    <script src={{ asset('js/jquery.bxslider.min.js') }}></script>
 {% endblock %}
 </body>
 </html>
