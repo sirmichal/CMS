@@ -17,12 +17,18 @@ class DefaultController extends Controller
 
         $query = $repo->createQueryBuilder('f')->select('f.attr, f.value')->getQuery();
         $result = $query->getResult();
-        $attrs = array_map(function($value) { return $value['attr']; }, $result);
-        $values = array_map(function($value) { return $value['value']; }, $result);
-        $output = array_combine($attrs, $values);
+        $footer = $this->formatDoctrineResult($result);
         
         $sliders = $doctrine->getRepository('AdminBundle:Slider')->findAll();
 
-        return $this->render('BlogBundle:Default:index.html.twig', array('sliders' => $sliders));
+        return $this->render('BlogBundle:Default:index.html.twig', array('f' => $footer, 'sliders' => $sliders));
+    }
+    
+    
+    private function formatDoctrineResult($doctrineResult) {
+        $attrs = array_map(function($value) { return $value['attr']; }, $doctrineResult);
+        $values = array_map(function($value) { return $value['value']; }, $doctrineResult);
+        $output = array_combine($attrs, $values);
+        return $output;
     }
 }
