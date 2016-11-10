@@ -7,7 +7,7 @@
     <title>CMS</title>
     {% block stylesheets %}
         <link rel="stylesheet" href={{ asset('css/bootstrap.css') }}>        
-        <link rel="stylesheet" href={{ asset('css/jquery.bxslider.css') }}>
+{#        <link rel="stylesheet" href={{ asset('css/jquery.bxslider.css') }}>#}
         <link rel="stylesheet" href={{ asset('css/styles.css') }}>
     {% endblock %}
     <script src={{ asset('js/jquery-3.1.0.js') }}></script>
@@ -16,16 +16,18 @@
 
 {% block page %}
 
-    <p>{{ f.street }}</p>
-    <p>{{ f.city }}</p>
-    <p>{{ f.phone_number }}</p>
-    <p>{{ f.postal_code }}</p>
 
-    
-    <div id="top-slider">
-        {% for s in sliders %}
-            <li><img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/></li>
-        {% endfor %}
+
+    <div class="top-slider-wrapper">
+
+        <div id="slides">
+            {% for s in sliders %}
+                <img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/>
+            {% endfor %}
+        </div>
+        <div class="last-post">
+            dasdasd
+        </div>
     </div>
 
 {% endblock %}
@@ -33,7 +35,8 @@
 {% block javascripts %}
     <script src={{ asset('js/bootstrap.js') }}></script>
     <script src={{ asset('js/script.js') }}></script>
-    <script src={{ asset('js/jquery.bxslider.min.js') }}></script>
+    <script src={{ asset('js/jquery.slides.min.js') }}></script>
+    <script src={{ asset('js/jquery-ui.min.js') }}></script>
 {% endblock %}
 </body>
 </html>

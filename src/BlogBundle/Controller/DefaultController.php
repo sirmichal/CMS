@@ -21,6 +21,7 @@ class DefaultController extends Controller
         
         $sliders = $doctrine->getRepository('AdminBundle:Slider')->findAll();
 
+
         return $this->render('BlogBundle:Default:index.html.twig', array('f' => $footer, 'sliders' => $sliders));
     }
     
