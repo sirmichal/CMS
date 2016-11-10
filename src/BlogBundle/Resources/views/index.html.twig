@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CMS</title>
+    <title>Blog</title>
     {% block stylesheets %}
         <link rel="stylesheet" href={{ asset('css/bootstrap.css') }}>        
 {#        <link rel="stylesheet" href={{ asset('css/jquery.bxslider.css') }}>#}
         <link rel="stylesheet" href={{ asset('css/styles.css') }}>
     {% endblock %}
     <script src={{ asset('js/jquery-3.1.0.js') }}></script>
+    <script src={{ asset('js/jquery-ui.min.js') }}></script>
 </head>
 <body>
 
-{% block page %}
+    {% include 'BlogBundle::navbar.html.twig' %}
+    {% include 'BlogBundle::slider.html.twig' %}
+{#    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% include 'BlogBundle::posts.html.twig' %}
+                </div>
+                <div class="col-md-4">
 
+<<<<<<< HEAD:src/BlogBundle/Resources/views/Default/index.html.twig
 
 
     <div class="top-slider-wrapper">
@@ -31,6 +41,13 @@
     </div>
 
 {% endblock %}
+=======
+                </div>
+            </div>
+        </div>
+    </div>#}
+
+>>>>>>> First version of navbar:src/BlogBundle/Resources/views/index.html.twig
 
 {% block javascripts %}
     <script src={{ asset('js/bootstrap.js') }}></script>

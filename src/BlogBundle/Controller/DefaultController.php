@@ -21,8 +21,14 @@ class DefaultController extends Controller
         
         $sliders = $doctrine->getRepository('AdminBundle:Slider')->findAll();
 
-
-        return $this->render('BlogBundle:Default:index.html.twig', array('f' => $footer, 'sliders' => $sliders));
+        $qb = $doctrine->getRepository('AdminBundle:Post')->createQueryBuilder('p');
+        $query = $qb->orderBy('p.id', 'DESC')->setMaxResults(1)->getQuery();
+        $lastPost = $query->getSingleResult();
+        
+        return $this->render('BlogBundle::index.html.twig', array(
+            'f' => $footer,
+            'sliders' => $sliders,
+            'lastPost' => $lastPost));
     }
     
     
