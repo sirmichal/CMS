@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Blog</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href={{ asset('css/bootstrap.css') }}>        
-{#        <link rel="stylesheet" href={{ asset('css/jquery.bxslider.css') }}>#}
+        <link rel="stylesheet" href={{ asset('css/bootstrap.css') }}>
+        {#        <link rel="stylesheet" href={{ asset('css/jquery.bxslider.css') }}>#}
         <link rel="stylesheet" href={{ asset('css/styles.css') }}>
     {% endblock %}
     <script src={{ asset('js/jquery-3.1.0.js') }}></script>
@@ -15,39 +15,20 @@
 </head>
 <body>
 
-    {% include 'BlogBundle::navbar.html.twig' %}
-    {% include 'BlogBundle::slider.html.twig' %}
-{#    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% include 'BlogBundle::posts.html.twig' %}
-                </div>
-                <div class="col-md-4">
+{% include 'BlogBundle::navbar.html.twig' %}
+{% include 'BlogBundle::slider.html.twig' %}
 
-<<<<<<< HEAD:src/BlogBundle/Resources/views/Default/index.html.twig
-
-
-    <div class="top-slider-wrapper">
-
-        <div id="slides">
-            {% for s in sliders %}
-                <img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/>
-            {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% include 'BlogBundle::posts.html.twig' %}
         </div>
-        <div class="last-post">
-            dasdasd
+        <div class="col-md-4">
+            {% include 'BlogBundle::sidebar.html.twig' %}
         </div>
     </div>
+</div>
 
-{% endblock %}
-=======
-                </div>
-            </div>
-        </div>
-    </div>#}
-
->>>>>>> First version of navbar:src/BlogBundle/Resources/views/index.html.twig
 
 {% block javascripts %}
     <script src={{ asset('js/bootstrap.js') }}></script>

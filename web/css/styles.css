@@ -86,28 +86,81 @@ html, body {
     z-index: 100;
 }
 
-/*.last-post-title {*/
-    /*display: table-cell;*/
-    /*vertical-align:middle;*/
-    /*text-align: center;*/
-    /*height: 50%;*/
-    /*font-style: italic;*/
-    /*font-weight: bold;*/
-/*}*/
-
-/*.last-post-info {*/
-    /*display: table-cell;*/
-    /*vertical-align:middle;*/
-    /*text-align: center;*/
-/*}*/
 
 /* ************************** */
-/* ********** POSTS ******** */
+/* ********** POSTS ********* */
 /* ************************** */
 
 .content {
-    background-color: #f8f8f8;
+    background-color: linen;
+    /*background-color: darkred;*/
     color: black;
     height: 100%;
+    width: 100%;
+}
 
+.big-post {
+    background-color: darkred;
+
+}
+/* ************************** */
+/* ******** BLOG INFO ******* */
+/* ************************** */
+.sidebar-box {
+    position: relative;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.sidebar-box:before{
+    content: "";
+    display: block;
+    padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+
+ .blog-info-section {
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+ }
+
+ .blog-info-author {
+     height: 50%;
+     background-color: #2F611C;
+ }
+.blog-info-author-description {
+    height: 50%;
+    background-color: #1b6d85;
+}
+
+/* ************************** */
+/* ******* CATEGORIES ******* */
+/* ************************** */
+
+.categories-entry {
+    /*display: table;*/
+    position: relative;
+    width: 100%;
+
+}
+.categories-entry-arrow {
+    width: 30%;
+    background-color: grey;
+    overflow:hidden;
+}
+
+.square {
+    position: relative;
+}
+
+.square-content {
+    height:100%;
+    width:100%;
+    position: absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }

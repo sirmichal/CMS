@@ -1,16 +1,16 @@
 <div class="top-slider-wrapper">
-    <div class="last-post">
-            <div class="last-post-title">
-                <p>{{ lastPost.title }}</p>
-            </div>
-            <div class="last-post-info">
-                <p>{{ lastPost.user.username }} / {{ lastPost.created | date("d-M-Y") }}</p>
-            </div>
-    </div>
-    
-    <div id="top-slider">
+
+    <div id="slides">
         {% for s in sliders %}
-            <li><img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/></li>
+            <img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/>
         {% endfor %}
+    </div>
+    <div class="last-post">
+        <div class="last-post-title">
+            <p>{{ lastPost.title }}</p>
+        </div>
+        <div class="last-post-info">
+            <p>{{ lastPost.user.username }} / {{ lastPost.created | date("d-M-Y") }}</p>
+        </div>
     </div>
 </div>

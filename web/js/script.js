@@ -22,3 +22,14 @@ $('.last-post').hover(function () {
 }, function () {
     $(this).stop().animate({backgroundColor: 'rgba(0, 0, 0, 0.6)'}, 200);
 })
+
+
+$('.square').each(function () {
+    var width = $(this).css('width');
+    $(this).css('padding-bottom', width);
+    var html = $(this).html();
+    $(this).empty();
+
+    $(this).wrapInner("<div class='square-content'>" + html + "</div>");
+});
+
