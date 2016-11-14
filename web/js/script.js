@@ -4,7 +4,7 @@ $(function () {
         height: 500,
         play: {
             active: false,
-            auto: true,
+            auto: false,
             interval: 2000,
             swap: false
         },
@@ -18,18 +18,14 @@ $(function () {
 });
 
 $('.last-post').hover(function () {
-    $(this).stop().animate({backgroundColor: 'rgba(0, 0, 0, 0.8)'}, 200);
+    $(this).stop().animate({backgroundColor: 'rgba(79, 188, 132, 0.9)', fontWeight: '400'}, 200);
 }, function () {
-    $(this).stop().animate({backgroundColor: 'rgba(0, 0, 0, 0.6)'}, 200);
+    $(this).stop().animate({backgroundColor: 'rgba(79, 188, 132, 0.75)', }, 200);
 })
 
 
-$('.square').each(function () {
-    var width = $(this).css('width');
-    $(this).css('padding-bottom', width);
-    var html = $(this).html();
-    $(this).empty();
-
-    $(this).wrapInner("<div class='square-content'>" + html + "</div>");
-});
-
+$('.big-post-content').each(function () {
+    var width = $(this).width();
+    var shortenedText = $(this).text().substring(0, width / 2);
+    $(this).text(shortenedText);
+})

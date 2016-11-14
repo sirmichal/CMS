@@ -1,5 +1,4 @@
 <div class="top-slider-wrapper">
-
     <div id="slides">
         {% for s in sliders %}
             <img src={{ asset('media/' ~ s.media.name) | imagine_filter('slider') }}/>

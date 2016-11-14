@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="categories-title">
+            CATEGORIES
+        </div>
+        {% for i in 0..5 %}
+            <div class="categories-entry">
+                <div class="categories-entry-arrow ">
+                    arrow
+                </div>
+
+                <div class="categories-entry-title text-uppercase">
+                    Tytuł kategorii
+                </div>
+
+                <div class="categories-entry-counter">
+                    {{ i }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
