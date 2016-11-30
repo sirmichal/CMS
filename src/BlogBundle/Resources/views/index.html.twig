@@ -11,11 +11,12 @@
         {% endblock %}
         <script src={{ asset('js/jquery-3.1.0.js') }}></script>
         <script src={{ asset('js/jquery-ui.min.js') }}></script>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     </head>
     <body>
 
         {% include 'BlogBundle::navbar.html.twig' %}
-        {% include 'BlogBundle::slider.html.twig' %}
+{#        {% include 'BlogBundle::slider.html.twig' %}#}
 
         <div class="main-content">
             <div class="container">

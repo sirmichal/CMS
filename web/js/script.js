@@ -29,3 +29,7 @@ $('.big-post-content').each(function () {
     var shortenedText = $(this).text().substring(0, width / 2);
     $(this).text(shortenedText);
 })
+
+var navbar_items = $('.nav.navbar-nav li').length;
+$('.nav.navbar-nav li').width(100/navbar_items + '%');
+

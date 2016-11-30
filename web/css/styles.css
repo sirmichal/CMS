@@ -4,6 +4,7 @@
 
 *, *:before, *:after {
     box-sizing: border-box;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .row-buffer {
@@ -20,16 +21,22 @@
 
 nav.navbar-wrapper {
     height: 150px;
+    background-color: white;
+    border: 0;
 }
 
 .social-icons-wrapper {
     line-height: 80px;
+    position: absolute;
+    left: 10%;
 }
 
 .title-wrapper {
     font-size: xx-large;
     line-height: 80px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 img.social-icon {
@@ -47,20 +54,18 @@ hr.navbar-separator {
     text-align: center;
 }
 
-.categories a {
+a.categories{
     text-decoration: none;
     text-transform: uppercase;
     color: grey;
     font-weight: bold;
     font-size: large;
+    transition: all 0.2s;
 }
 
-.categories a:not(:first-child) {
-    margin-left: 80px;
-}
-
-.categories a:not(:last-child) {
-    margin-right: 80px;
+a.categories:hover {
+    color: darkred !important;
+    font-size: x-large;
 }
 
 /* ************************** */
@@ -69,6 +74,7 @@ hr.navbar-separator {
 
 .top-slider-wrapper {
     position: relative;
+    /*height: 500px;*/
 }
 
 #slides {
@@ -154,11 +160,19 @@ a.big-post-hyperlink:hover {
 }
 
 /* ************************** */
+/* ****** SIDEBAR INFO ****** */
+/* ************************** */
+
+.sidebar-section {
+    margin-bottom: 35px;
+}
+
+/* ************************** */
 /* ******** BLOG INFO ******* */
 /* ************************** */
 
 .blog-info-section {
-    height: 30vh;
+    height: 26vw;
     position: relative;
 }
 
@@ -175,7 +189,7 @@ a.big-post-hyperlink:hover {
 
 .blog-info-author-text {
     position: relative;
-    padding-top: 18%;
+    padding-top: 25%;
     height: 50%;
     background-color: white;
 }
@@ -189,20 +203,20 @@ p.author-paragraph {
 img.img-author {
     position: absolute;
     z-index: 100;
-    top: 8vh; /* half of the .blog-info-section height - half of the width */
-    left: calc(50% - 7vh);
-    width: 12vh;
+    top: 8vw; /* half of the .blog-info-section height - half of the width */
+    left: calc(50% - 5vw);
+    width: 10vw;
 }
 
 @media screen and (max-width: 992px) {
     .blog-info-section {
-        height: 40vh;
+        height: 60vw;
     }
 
     img.img-author {
-        width: 18vh;
-        top: 11vh; /* half of the .blog-info-section height - half of the width */
-        left: calc(50% - 9vh);
+        width: 20vw;
+        top: 20vw; /* half of the .blog-info-section height - half of the width */
+        left: calc(50% - 10vw);
     }
 
     .blog-info-author-text {
@@ -275,6 +289,8 @@ img.img-author {
 
 .main-content {
     background-color: rgb(242, 242, 242);
+    position: relative;
+    
     padding-bottom: 50px;
 }
 
@@ -303,4 +319,23 @@ footer {
 .footer-content {
     position: absolute;
     top: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar-nav {
+    width: 100%;
+}
+
+#navigation-bar {
+    background-color: white;
 }
