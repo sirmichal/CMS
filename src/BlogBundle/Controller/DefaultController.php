@@ -4,11 +4,15 @@ namespace BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use BlogBundle\Form\SubscriberForm;
+use BlogBundle\Entity\Subscriber;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="homepage")
      */
     public function indexAction()
     {
@@ -25,10 +29,13 @@ class DefaultController extends Controller
         $query = $qb->orderBy('p.id', 'DESC')->setMaxResults(1)->getQuery();
         $lastPost = $query->getSingleResult();
         
+        $form = $this->createSubscribeEmailForm();
+
         return $this->render('BlogBundle::index.html.twig', array(
             'f' => $footer,
             'sliders' => $sliders,
-            'lastPost' => $lastPost));
+            'lastPost' => $lastPost,
+            'form' => $form->createView()));
     }
     
     
@@ -38,4 +45,29 @@ class DefaultController extends Controller
         $output = array_combine($attrs, $values);
         return $output;
     }
+    
+    private function createSubscribeEmailForm() {
+        $subscriber = new Subscriber();
+        $form = $this->createForm(SubscriberForm::class, $subscriber, array(
+            'action' => $this->generateUrl('new_subscriber')
+        ));
+        return $form;
+    }
+    
+    /**
+     * @Route("/subscriber", name="new_subscriber")
+     */
+    public function newSubscriberAction(Request $request) {
+        $email = $request->request->get('subscriber_form')['email'];
+        if(null != $email) {
+            $subscriber = new Subscriber();
+            $subscriber->setEmail($email);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($subscriber);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('homepage');
+    }
+
 }

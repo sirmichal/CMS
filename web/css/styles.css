@@ -7,8 +7,11 @@
     font-family: 'Noto Sans', sans-serif;
 }
 
-.row-buffer {
+.row-buffer-top-bottom {
     margin: 25px 0;
+}
+.row-buffer-left-right {
+    margin: 0 25px;
 }
 
 .sidebar {
@@ -23,6 +26,14 @@ nav.navbar-wrapper {
     height: 150px;
     background-color: white;
     border: 0;
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+#navigation-bar {
+    background-color: white;
 }
 
 .social-icons-wrapper {
@@ -128,6 +139,7 @@ a.categories:hover {
 
 .big-post-title {
     font-size: x-large;
+    font-style: italic;
     width: 80%;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -140,6 +152,7 @@ a.categories:hover {
 }
 
 .big-post-info {
+    font-size: small;
     margin: 20px 0;
     color: silver;
 }
@@ -233,9 +246,13 @@ img.img-author {
 /* ******* CATEGORIES ******* */
 /* ************************** */
 
-.categories-title {
+.sidebar-section-title {
     font-size: large;
-    color: blueviolet;
+    color: black;
+    background-color: white;
+    border-bottom: 3px solid grey;
+    padding: 8px ;
+    margin-bottom: 8px;
 }
 
 .categories-entry {
@@ -283,8 +300,9 @@ img.img-author {
 
 .subscribers-section {
     width: 100%;
-    background-color: khaki;
-    height: 200px;
+    background-color: white;
+    height: 160px;
+    padding: 10%;
 }
 
 .main-content {
@@ -319,23 +337,4 @@ footer {
 .footer-content {
     position: absolute;
     top: 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.navbar-nav {
-    width: 100%;
-}
-
-#navigation-bar {
-    background-color: white;
 }
