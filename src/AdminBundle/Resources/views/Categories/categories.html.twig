@@ -1,0 +1,36 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.css"/>
+{% endblock %}
+
+{% block content %}
+    <table id="categories-table" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Kategoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in categories %}
+                <tr class="edit-row">
+                    <td>{{ c.category }}<br>
+                        <a href={{ path('delete_category', {'id': c.id}) }}>Usuń</a></td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+            
+    {{ form_start(form) }}
+    {{ form_widget(form.category) }}
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('admin/js/datatable/categories.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.12/datatables.js"></script>
+{% endblock %}

@@ -2,18 +2,18 @@
     <div class="col-md-12">
         <div class="sidebar-section">
             <div class="sidebar-section-title text-uppercase">kategorie</div>
-            {% for i in 0..5 %}
+            {% for c in categories %}
                 <div class="categories-entry">
                     <div class="categories-entry-arrow ">
                         arrow
                     </div>
 
                     <div class="categories-entry-title text-uppercase">
-                        Tytuł kategorii
+                        {{ c.category }}
                     </div>
 
                     <div class="categories-entry-counter">
-                        {{ i }}
+                        1
                     </div>
                 </div>
             {% endfor %}

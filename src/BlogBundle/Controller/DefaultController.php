@@ -24,6 +24,7 @@ class DefaultController extends Controller
         $footer = $this->formatDoctrineResult($result);
         
         $sliders = $doctrine->getRepository('AdminBundle:Slider')->findAll();
+        $categories = $doctrine->getRepository('AdminBundle:Category')->findAll();
 
         $qb = $doctrine->getRepository('AdminBundle:Post')->createQueryBuilder('p');
         $query = $qb->orderBy('p.id', 'DESC')->setMaxResults(1)->getQuery();
@@ -34,6 +35,7 @@ class DefaultController extends Controller
         return $this->render('BlogBundle::index.html.twig', array(
             'f' => $footer,
             'sliders' => $sliders,
+            'categories' => $categories,
             'lastPost' => $lastPost,
             'form' => $form->createView()));
     }
