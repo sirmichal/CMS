@@ -11,22 +11,26 @@ use BlogBundle\Entity\Subscriber;
 
 class DefaultController extends Controller
 {
+    private $doctrine;
+    
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        $doctrine = $this->getDoctrine();
-        $repo = $doctrine->getRepository('AdminBundle:Footer');
+        $this->doctrine = $this->getDoctrine();
+        $repo = $this->doctrine->getRepository('AdminBundle:Footer');
 
         $query = $repo->createQueryBuilder('f')->select('f.attr, f.value')->getQuery();
         $result = $query->getResult();
         $footer = $this->formatDoctrineResult($result);
         
-        $sliders = $doctrine->getRepository('AdminBundle:Slider')->findAll();
-        $categories = $doctrine->getRepository('AdminBundle:Category')->findAll();
+        $sliders = $this->doctrine->getRepository('AdminBundle:Slider')->findAll();
+        
+        $categories = $this->getCategoriesData();
+        
 
-        $qb = $doctrine->getRepository('AdminBundle:Post')->createQueryBuilder('p');
+        $qb = $this->doctrine->getRepository('AdminBundle:Post')->createQueryBuilder('p');
         $query = $qb->orderBy('p.id', 'DESC')->setMaxResults(1)->getQuery();
         $lastPost = $query->getSingleResult();
         
@@ -70,6 +74,19 @@ class DefaultController extends Controller
         }
 
         return $this->redirectToRoute('homepage');
+    }
+    
+    private function getCategoriesData() {
+        $categoriesEntities = $this->doctrine->getRepository('AdminBundle:Category')->findAll();
+        
+        $categories = array(); 
+        foreach($categoriesEntities as $c) {
+            $entry['name'] = $c->getCategory();
+            $entry['posts_counter'] = $c->getPosts()->count();
+            $categories[] = $entry;
+        }
+        
+        return $categories;
     }
 
 }

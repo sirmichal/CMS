@@ -73,6 +73,16 @@ class Category
     {
         return $this->category;
     }
+    
+    /**
+     * Get posts
+     * 
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getPosts()
+    {
+        return $this->posts; 
+    }
 
 }
 
