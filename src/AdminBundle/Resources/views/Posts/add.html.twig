@@ -18,12 +18,15 @@
                     </div>
                 </div>
 
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                {{ form_row(form.categories) }}  
+                
                 <div class="form-group row">
                     <div class="col-xs-12">
                         {{ form_widget(form.thumbId, {'id': 'thumbnail-field'}) }}
                     </div>
                 </div>
-
+                    
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-img-modal">Wybierz obrazek</button>
                 <div id="add-img-modal" class="modal fade" role="dialog">
                 </div>

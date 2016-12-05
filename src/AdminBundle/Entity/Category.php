@@ -3,6 +3,7 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AdminBundle\Entity\Post;
 
 /**
  * Category
@@ -27,7 +28,17 @@ class Category
      * @ORM\Column(name="category", type="string", length=255, unique=true)
      */
     private $category;
+    
+    /**
+     * @var Post
+     * 
+     * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Post", mappedBy="categories")
+     */
+    private $posts;
 
+    public function __construct() {
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -62,5 +73,6 @@ class Category
     {
         return $this->category;
     }
+
 }
 

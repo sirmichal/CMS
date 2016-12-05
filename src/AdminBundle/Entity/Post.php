@@ -3,8 +3,10 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use AdminBundle\Entity\User;
 use AdminBundle\Entity\Media;
+use AdminBundle\Entity\Category;
 
 /**
  * Post
@@ -57,8 +59,19 @@ class Post
      * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Media")
      */
     private $thumbnail;
+    
+    /**
+     * @var Category
+     * 
+     * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Category", inversedBy="posts")
+     */
+    private $categories;
 
-
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -188,5 +201,25 @@ class Post
     {
         return $this->thumbnail;
     }
+    
+    /**
+     * Get categories
+     * 
+     * @return Category
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    /**
+     * Set categories
+     * 
+     */
+    public function setCategories(ArrayCollection $categories) {
+        $this->categories = $categories;
+        return $this;
+    }
+
 }
 
