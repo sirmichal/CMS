@@ -1,3 +1,17 @@
 input {
     display: none !important;
 }
+
+form[name=file_upload_form] {
+    text-align: center;
+}
+
+#label-upload {
+    width: 80%;
+    text-align: center;
+    border: 12px dashed rgb(26, 69, 105);
+    border-radius: 20px;
+    padding: 50px 0;
+    margin: 100px auto;
+    position: relative;
+}
