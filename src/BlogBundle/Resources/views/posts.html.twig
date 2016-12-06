@@ -1,29 +1,23 @@
-<div class="row row-buffer-top-bottom">
-    <div class="col-md-12">
-        {% include 'BlogBundle::big-post.html.twig' %}
-    </div>
-</div>
+{% set posts_no = posts|length %}
 
-    <div class="row row-buffer-top-bottom">
-    <div class="col-md-6">
-        {% include 'BlogBundle::big-post.html.twig' %}
-    </div>
-    <div class="col-md-6">
-        {% include 'BlogBundle::big-post.html.twig' %}
-    </div>
-</div>
-
-    <div class="row row-buffer-top-bottom">
-    <div class="col-md-12">
-        {% include 'BlogBundle::big-post.html.twig' %}
-    </div>
-</div>
-
-    <div class="row row-buffer-top-bottom">
-    <div class="col-md-6">
-        {% include 'BlogBundle::big-post.html.twig' %}
-    </div>
-    <div class="col-md-6">
-        {% include 'BlogBundle::big-post.html.twig' %}
-    </div>
-</div>
+{% for i in 0..posts_no if i%3 == 0 %}
+    {% if posts[i] is defined %}
+        <div class="row row-buffer-top-bottom">
+            <div class="col-md-12">
+                {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i]} only %}
+            </div>
+        </div>
+        {% if posts[i + 1] is defined %}
+            <div class="row row-buffer-top-bottom">
+                <div class="col-md-6">
+                    {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i+1]} only %}
+                </div>
+                {% if posts[i+2] is defined %}
+                    <div class="col-md-6">
+                        {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i+2]} only %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}

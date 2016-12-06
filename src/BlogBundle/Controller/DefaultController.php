@@ -26,6 +26,7 @@ class DefaultController extends Controller
         $footer = $this->formatDoctrineResult($result);
         
         $sliders = $this->doctrine->getRepository('AdminBundle:Slider')->findAll();
+        $posts = $this->doctrine->getRepository('AdminBundle:Post')->findAll();
         
         $categories = $this->getCategoriesData();
         
@@ -41,7 +42,9 @@ class DefaultController extends Controller
             'sliders' => $sliders,
             'categories' => $categories,
             'lastPost' => $lastPost,
-            'form' => $form->createView()));
+            'form' => $form->createView(),
+            'posts' => $posts
+        ));
     }
     
     
@@ -77,10 +80,10 @@ class DefaultController extends Controller
     }
     
     private function getCategoriesData() {
-        $categoriesEntities = $this->doctrine->getRepository('AdminBundle:Category')->findAll();
+        $categoryEntities = $this->doctrine->getRepository('AdminBundle:Category')->findAll();
         
         $categories = array(); 
-        foreach($categoriesEntities as $c) {
+        foreach($categoryEntities as $c) {
             $entry['name'] = $c->getCategory();
             $entry['posts_counter'] = $c->getPosts()->count();
             $categories[] = $entry;

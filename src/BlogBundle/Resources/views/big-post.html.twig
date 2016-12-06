@@ -1,22 +1,24 @@
 <a class="big-post-hyperlink" href="http://onet.pl">
     <div class="big-post text-center">
         <div class="big-post-thumbnail">
+            {% if p.thumbnail is not null %}
+                <img class="cropped-center" src={{ asset('media/' ~ p.thumbnail.name) }}>    
+            {% endif %}
         </div>
         <div class="big-post-category text-uppercase">
-            kategoria
+            {% for c in p.categories %}
+                <a href="#">{{ c.category }}</a>
+                {% if loop.last == false %}&#8213{% endif %}
+            {% endfor %}
         </div>
         <div class="big-post-title center-block">
-            Lorem ipsum dolor sit ame dolor sit ame
+            {{ p.title }}
         </div>
         <div class="big-post-content center-block">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nulla felis, posuere at ipsum a, ultrices
-            euismod augue. Donec interdum, leo at facilisis rutrum, est augue fringilla sapien, eu facilisis ligula leo quis
-            neque. Proin mi lectus, vestibulum sit amet elementum at, faucibus a nunc. Curabitur interdum efficitur felis,
-            quis sollicitudin dui. Etiam tortor magna, convallis vitae scelerisque et, ultricies nec orci. Quisque
-            consectetur hendrerit elementum. Nullam quis mattis augue.
+            {{ p.content }}
         </div>
         <div class="big-post-info">
-            michal / data postu
+            {{ p.user }} / {{ p.created | date("d-M-Y") }}
         </div>
         <div class="big-post-read-more-btn">
             <button class="btn btn-lg round">Więcej</button>

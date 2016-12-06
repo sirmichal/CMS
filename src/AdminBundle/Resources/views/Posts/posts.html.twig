@@ -12,6 +12,7 @@
         <tr>
             <th>Tytuł</th>
             <th>Treść</th>
+            <th>Kategorie</th>
             <th>Użytkownik</th>
             <th>Dodano</th>
         </tr>
@@ -22,7 +23,12 @@
                 <td>{{ post.title }}<br>
                     <a href={{ path('posts_edit', {'id': post.id}) }}>Edytuj</a>
                     <a href={{ path('posts_delete', {'id': post.id}) }}>Usuń</a></td>
-                <td>{{ post.content }}</td>
+                <td class="text-justify">{{ post.content }}</td>
+                <td>
+                    {% for c in post.categories %}
+                        {{ c.category }} <br>
+                    {% endfor %}
+                </td>
                 <td>{{ post.user }}</td>
                 <td>{{ post.created|date("d-M-Y H:i") }}</td>
             </tr>
