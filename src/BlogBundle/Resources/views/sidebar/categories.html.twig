@@ -3,16 +3,16 @@
         <div class="sidebar-section">
             <div class="sidebar-section-title text-uppercase">kategorie</div>
             {% for c in categories %}
-                <div class="categories-entry">
-                    <div class="categories-entry-arrow ">
+                <div class="sidebar-single-entry">
+                    <div class="sidebar-single-entry-arrow ">
                         &#10095
                     </div>
 
-                    <div class="categories-entry-title text-uppercase">
+                    <div class="categories-single-entry-title text-uppercase">
                         {{ c.name }}
                     </div>
 
-                    <div class="categories-entry-counter">
+                    <div class="categories-single-entry-counter">
                         {{ c.posts_counter }}
                     </div>
                 </div>

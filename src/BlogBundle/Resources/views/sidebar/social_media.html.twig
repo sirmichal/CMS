@@ -2,6 +2,19 @@
     <div class="col-md-12">
         <div class="sidebar-section">
             <div class="sidebar-section-title text-uppercase">social media</div>
+
+            {% set social_media_names = ['facebook', 'instagram', 'twitter', 'skype', 'pinterest'] %}
+
+            {% for s in social_media_names %}
+                <div class="sidebar-single-entry">
+                    <div class="sidebar-single-entry-arrow ">
+                        &#10095
+                    </div>
+                    <div class="social-media-single-entry-title text-uppercase">
+                        {{ s }}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

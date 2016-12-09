@@ -25,6 +25,10 @@
     object-position: center center;
 }
 
+a:link {
+    text-decoration: none;
+}
+
 /* ************************** */
 /* ***** NAVIGATION BAR ***** */
 /* ************************** */
@@ -204,18 +208,13 @@ a.big-post-hyperlink:hover {
 
 .blog-info-author {
     height: 50%;
-    background: repeating-linear-gradient(
-            -45deg,
-            #8c8c8c,
-            #8c8c8c 30px,
-            #ce8483 30px,
-            #ce8483 60px
-    );
+
+    background-image: url("../assets/img/blog-info-bg.jpg");
 }
 
 .blog-info-author-text {
     position: relative;
-    padding-top: 25%;
+    padding-top: 7vw;
     height: 50%;
     background-color: white;
 }
@@ -246,7 +245,7 @@ img.img-author {
     }
 
     .blog-info-author-text {
-        padding-top: 13%;
+        padding-top: 15vw;
     }
 
     p.author-paragraph {
@@ -268,12 +267,9 @@ img.img-author {
     margin-bottom: 8px;
 }
 
-.categories-entry {
+.sidebar-single-entry {
     margin-top: 5px;
     margin-bottom: 5px;
-}
-
-.categories-entry {
     display: flex;
     position: relative;
     width: 100%;
@@ -281,13 +277,13 @@ img.img-author {
     overflow: hidden;
 }
 
-.categories-entry-arrow, .categories-entry-title, .categories-entry-counter {
+.sidebar-single-entry-arrow, .categories-single-entry-title, .categories-single-entry-counter, .social-media-single-entry-title {
     height: 100%;
     display: flex;
     align-items: center;
 }
 
-.categories-entry-arrow {
+.sidebar-single-entry-arrow {
     background-color: grey;
     flex-basis: 15%;
     justify-content: center;
@@ -295,17 +291,18 @@ img.img-author {
     font-size: x-large;
 }
 
-.categories-entry-title {
+.categories-single-entry-title {
     background-color: white;
     flex-basis: 70%;
     padding-left: 15px;
 }
 
-.categories-entry-counter {
+.categories-single-entry-counter {
     background-color: grey;
     flex-basis: 15%;
     justify-content: center;
     color: white;
+    font-size: large;
 }
 
 /* ************************** */
@@ -322,9 +319,19 @@ img.img-author {
 .main-content {
     background-color: rgb(242, 242, 242);
     position: relative;
-    
     padding-bottom: 50px;
 }
+
+/* ************************** */
+/* ******* SOCIAL MEDIA ***** */
+/* ************************** */
+
+.social-media-single-entry-title {
+    background-color: white;
+    flex-basis: 85%;
+    padding-left: 15px;
+}
+
 
 /* ************************** */
 /* ********** FOOTER ******** */

@@ -33,3 +33,7 @@ $('.big-post-content').each(function () {
 var navbar_items = $('.nav.navbar-nav li').length;
 $('.nav.navbar-nav li').width(100/navbar_items + '%');
 
+$('.footer-arrow').click(function () {
+    var body = $('body');
+    body.stop().animate({ scrollTop: 0 }, '400', 'swing');
+});

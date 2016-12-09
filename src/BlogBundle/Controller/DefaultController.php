@@ -30,19 +30,13 @@ class DefaultController extends Controller
         
         $categories = $this->getCategoriesData();
         
-
-        $qb = $this->doctrine->getRepository('AdminBundle:Post')->createQueryBuilder('p');
-        $query = $qb->orderBy('p.id', 'DESC')->setMaxResults(1)->getQuery();
-        $lastPost = $query->getSingleResult();
-        
-        $form = $this->createSubscribeEmailForm();
+        $subscribeEmailForm = $this->createSubscribeEmailForm();
 
         return $this->render('BlogBundle::index.html.twig', array(
             'f' => $footer,
             'sliders' => $sliders,
             'categories' => $categories,
-            'lastPost' => $lastPost,
-            'form' => $form->createView(),
+            'form' => $subscribeEmailForm->createView(),
             'posts' => $posts
         ));
     }
