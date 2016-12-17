@@ -22,7 +22,7 @@ class FooterService
      * @var Registry
      */
     private $doctrine;
-    
+
     /**
      * @var Session
      */
@@ -59,6 +59,7 @@ class FooterService
      * FooterService constructor.
      * @param FormFactory $factoryForm
      * @param Registry $doctrine
+     * @param Session $session
      */
     public function __construct(FormFactory $factoryForm, Registry $doctrine, Session $session)
     {
@@ -66,6 +67,8 @@ class FooterService
         $this->doctrine = $doctrine;
         $this->session = $session;
         $this->repo = $this->doctrine->getManager()->getRepository('AdminBundle:Footer');
+
+        $this->readDataFromDb();
     }
 
     /**
@@ -116,5 +119,37 @@ class FooterService
         $this->cityEnt = $this->repo->findOneByAttr('city');
         $this->phoneNumEnt = $this->repo->findOneByAttr('phone_number');
         $this->postalCodeEnt = $this->repo->findOneByAttr('postal_code');
+    }
+
+    public function getStreet() {
+        $street = "";
+        if ($this->streetEnt) {
+            $street = $this->streetEnt->getValue();
+        }
+        return $street;
+    }
+
+    public function getCity() {
+        $city = "";
+        if ($this->cityEnt) {
+            $city = $this->cityEnt->getValue();
+        }
+        return $city;
+    }
+
+    public function getPhoneNumber() {
+        $phoneNumber = "";
+        if ($this->phoneNumEnt) {
+            $phoneNumber = $this->phoneNumEnt->getValue();
+        }
+        return $phoneNumber;
+    }
+
+    public function getPostalCode() {
+        $postalCode = "";
+        if ($this->postalCodeEnt) {
+            $postalCode = $this->postalCodeEnt->getValue();
+        }
+        return $postalCode;
     }
 }

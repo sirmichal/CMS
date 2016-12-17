@@ -19,7 +19,7 @@ class DefaultController extends Controller
     {
         return $this->render('AdminBundle:Default:home.html.twig');
     }
-    
+
     /**
      * @Route("users", name="users")
      * @return Response
@@ -65,13 +65,13 @@ class DefaultController extends Controller
         }
         return $this->render('AdminBundle:Default:upload.html.twig', array('form' => $form->createView()));
     }
-    
+
     /**
      * @Route("media/library", name="media_library")
      */
     public function mediaLibraryAction() {
         $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
-        
+
         return $this->render('AdminBundle:Default:media_library.html.twig', array('files' => $mediaFiles));
     }
 
@@ -82,10 +82,10 @@ class DefaultController extends Controller
     public function deleteMediaAction($mediaId) {
         $mediaRepo = $this->getDoctrine()->getRepository('AdminBundle:Media');
         $media = $mediaRepo->findOneById($mediaId);
-        
+
         $cacheMngr = $this->get('liip_imagine.cache.manager');
         $cacheMngr->remove('media/' . $media->getName());
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($media);
         $em->flush();
@@ -100,9 +100,9 @@ class DefaultController extends Controller
      */
     public function footerAction(Request $request)
     {
-        $footerHandler = $this->get("footer_handler");
-        $form = $footerHandler->createForm();
-        $footerHandler->submit($request);
+        $footerService = $this->get("footer_service");
+        $form = $footerService->createForm();
+        $footerService->submit($request);
 
         return $this->render('AdminBundle:Default:footer.html.twig', array('form' => $form->createView()));
     }
@@ -114,13 +114,13 @@ class DefaultController extends Controller
      */
     public function getModalAction(Request $request) {
         $id = $request->query->get('id');
-        
+
         /** @var Media $media */
         $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
-        
+
         $imagineCacheManager = $this->get('liip_imagine.cache.manager');
         $preview_path = $imagineCacheManager->getBrowserPath('media/' . $media->getName(), 'single_image');
-        
+
         $rawInfo = getimagesize('media/' . $media->getName());
         $info['width'] = $rawInfo[0];
         $info['height'] = $rawInfo[1];

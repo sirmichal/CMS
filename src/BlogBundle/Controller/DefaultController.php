@@ -4,51 +4,37 @@ namespace BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use BlogBundle\Form\SubscriberForm;
 use BlogBundle\Entity\Subscriber;
 
 class DefaultController extends Controller
 {
     private $doctrine;
-    
+
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction()
     {
         $this->doctrine = $this->getDoctrine();
-        $repo = $this->doctrine->getRepository('AdminBundle:Footer');
-
-        $query = $repo->createQueryBuilder('f')->select('f.attr, f.value')->getQuery();
-        $result = $query->getResult();
-        $footer = $this->formatDoctrineResult($result);
-        
         $sliders = $this->doctrine->getRepository('AdminBundle:Slider')->findAll();
         $posts = $this->doctrine->getRepository('AdminBundle:Post')->findAll();
-        
+
         $categories = $this->getCategoriesData();
-        
+
         $subscribeEmailForm = $this->createSubscribeEmailForm();
 
         return $this->render('BlogBundle::index.html.twig', array(
-            'f' => $footer,
+            'footer' => $this->get("footer_service"),
             'sliders' => $sliders,
             'categories' => $categories,
             'form' => $subscribeEmailForm->createView(),
             'posts' => $posts
         ));
     }
-    
-    
-    private function formatDoctrineResult($doctrineResult) {
-        $attrs = array_map(function($value) { return $value['attr']; }, $doctrineResult);
-        $values = array_map(function($value) { return $value['value']; }, $doctrineResult);
-        $output = array_combine($attrs, $values);
-        return $output;
-    }
-    
+
     private function createSubscribeEmailForm() {
         $subscriber = new Subscriber();
         $form = $this->createForm(SubscriberForm::class, $subscriber, array(
@@ -56,9 +42,11 @@ class DefaultController extends Controller
         ));
         return $form;
     }
-    
+
     /**
      * @Route("/subscriber", name="new_subscriber")
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function newSubscriberAction(Request $request) {
         $email = $request->request->get('subscriber_form')['email'];
@@ -72,17 +60,17 @@ class DefaultController extends Controller
 
         return $this->redirectToRoute('homepage');
     }
-    
+
     private function getCategoriesData() {
         $categoryEntities = $this->doctrine->getRepository('AdminBundle:Category')->findAll();
-        
-        $categories = array(); 
+
+        $categories = array();
         foreach($categoryEntities as $c) {
             $entry['name'] = $c->getCategory();
             $entry['posts_counter'] = $c->getPosts()->count();
             $categories[] = $entry;
         }
-        
+
         return $categories;
     }
 
