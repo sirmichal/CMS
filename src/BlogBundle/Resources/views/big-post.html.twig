@@ -2,7 +2,7 @@
     <div class="big-post text-center">
         <div class="big-post-thumbnail">
             {% if p.thumbnail is not null %}
-                <img class="cropped-center" src={{ asset('media/' ~ p.thumbnail.name) }}>    
+                <img class="cropped-center" src={{ asset('media/' ~ p.thumbnail.name) }}>
             {% endif %}
         </div>
         <div class="big-post-category text-uppercase">
@@ -18,7 +18,7 @@
             {{ p.content }}
         </div>
         <div class="big-post-info">
-            {{ p.user }} / {{ p.created | date("d-M-Y") }}
+            {{ p.user }} / {{ p.created | localizeddate('none', 'none', 'pl', null, "d MMMM Y, HH:mm") }}
         </div>
         <div class="big-post-read-more-btn">
             <button class="btn btn-lg round">Więcej</button>
