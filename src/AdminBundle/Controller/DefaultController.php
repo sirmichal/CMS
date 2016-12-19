@@ -17,6 +17,8 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        dump($this->container->getParameter("admin.config"));
+        die();
         return $this->render('AdminBundle:Default:home.html.twig');
     }
 
