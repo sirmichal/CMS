@@ -118,5 +118,9 @@ fos_js_routing:
     routes_to_expose: ['get_modal', 'posts_modal_add_img_render', 'get_media_specific_cache', 'slider_modal_add_img_render', 'slider_modal_add_img_submit', 'slider_delete_img']
 
 admin:
-  footer:
-    [ 'aaa', 'bbb', 'ccc' ]
+  footer_form:
+      - {name: 'street', label: 'Ulica:', placeholder: 'Wpisz ulicę'}
+      - {name: 'city', label: 'Miasto:', placeholder: 'Wpisz miasto'}
+      - {name: 'phone_number', label: 'Nr telefonu:', placeholder: 'Wpisz nr telefonu'}
+      - {name: 'postal_code', label: 'Kod pocztowy:', placeholder: 'Wpisz kod pocztowy'}
+    

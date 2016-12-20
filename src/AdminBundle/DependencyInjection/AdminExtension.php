@@ -21,7 +21,7 @@ class AdminExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $container->setParameter($this->getAlias() . 'config', $config);
+        $container->setParameter($this->getAlias(), $config);
     }
 
     public function getAlias()

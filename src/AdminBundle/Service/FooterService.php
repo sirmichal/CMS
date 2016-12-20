@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormFactory;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class FooterService
 {
@@ -38,36 +39,27 @@ class FooterService
      */
     private $form;
 
-    /**
-     * @var Footer
-     */
-    private $streetEnt;
-    /**
-     * @var Footer
-     */
-    private $cityEnt;
-    /**
-     * @var Footer
-     */
-    private $phoneNumEnt;
-    /**
-     * @var Footer
-     */
-    private $postalCodeEnt;
+    private $config;
+    
+    private $footerEntities;
+    
+    private $data;
 
     /**
      * FooterService constructor.
      * @param FormFactory $factoryForm
      * @param Registry $doctrine
      * @param Session $session
+     * @param ContainerInterface $container
      */
-    public function __construct(FormFactory $factoryForm, Registry $doctrine, Session $session)
+    public function __construct(FormFactory $factoryForm, Registry $doctrine, Session $session, ContainerInterface $container)
     {
         $this->factoryForm = $factoryForm;
         $this->doctrine = $doctrine;
         $this->session = $session;
         $this->repo = $this->doctrine->getManager()->getRepository('AdminBundle:Footer');
-
+        $this->config = $container->getParameter('admin')['footer_form'];
+        
         $this->readDataFromDb();
     }
 
@@ -76,15 +68,14 @@ class FooterService
      */
     public function createForm()
     {
-        $this->readDataFromDb();
+        $this->form = $this->factoryForm->create(FooterForm::class, null, array('footer_service' => $this));
+        
+        foreach ($this->footerEntities as $ent) {
+            $attr = $ent->getAttr();
+            $value = $ent->getValue();
 
-        $this->form = $this->factoryForm->create(FooterForm::class);
-        $this->form->setData([
-            'street' => $this->streetEnt->getValue(),
-            'city' => $this->cityEnt->getValue(),
-            'phoneNum' => $this->phoneNumEnt->getValue(),
-            'postalCode' => $this->postalCodeEnt->getValue()
-        ]);
+            $this->form->get($attr)->setData($value);
+        }
         return $this->form;
     }
 
@@ -103,53 +94,37 @@ class FooterService
     private function saveDataToDb()
     {
         $em = $this->doctrine->getManager();
-
         $formData = $this->form->getData();
-        $this->streetEnt->setValue($formData['street']);
-        $this->cityEnt->setValue($formData['city']);
-        $this->phoneNumEnt->setValue($formData['phoneNum']);
-        $this->postalCodeEnt->setValue($formData['postalCode']);
-
+        
+        foreach ($this->config as $field) {
+            $em->createQuery('DELETE FROM AdminBundle:Footer')->execute();
+            
+            $attr = $field['name'];
+            $value = $formData[$attr];
+            $ent = new Footer($attr, $value);
+            $em->persist($ent);
+        }
         $em->flush();
     }
 
     private function readDataFromDb()
     {
-        $this->streetEnt = $this->repo->findOneByAttr('street');
-        $this->cityEnt = $this->repo->findOneByAttr('city');
-        $this->phoneNumEnt = $this->repo->findOneByAttr('phone_number');
-        $this->postalCodeEnt = $this->repo->findOneByAttr('postal_code');
+        foreach ($this->config as $field) {
+            $attr = $field['name'];
+            $ent = $this->repo->findOneByAttr($attr);
+            if (null == $ent) {
+                $ent = new Footer($attr);
+            }
+            $this->footerEntities[$attr] = $ent;
+            $this->data[$attr] = $ent->getValue();
+        }
     }
 
-    public function getStreet() {
-        $street = "";
-        if ($this->streetEnt) {
-            $street = $this->streetEnt->getValue();
-        }
-        return $street;
+    public function getConfig() {
+        return $this->config;
     }
-
-    public function getCity() {
-        $city = "";
-        if ($this->cityEnt) {
-            $city = $this->cityEnt->getValue();
-        }
-        return $city;
-    }
-
-    public function getPhoneNumber() {
-        $phoneNumber = "";
-        if ($this->phoneNumEnt) {
-            $phoneNumber = $this->phoneNumEnt->getValue();
-        }
-        return $phoneNumber;
-    }
-
-    public function getPostalCode() {
-        $postalCode = "";
-        if ($this->postalCodeEnt) {
-            $postalCode = $this->postalCodeEnt->getValue();
-        }
-        return $postalCode;
+    
+    public function getData() {
+        return $this->data;
     }
 }

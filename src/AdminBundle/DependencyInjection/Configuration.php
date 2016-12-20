@@ -20,10 +20,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('footer')
-                    ->prototype('scalar')
+                ->arrayNode('footer_form')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('name')->end()
+                            ->scalarNode('label')->end()
+                            ->scalarNode('placeholder')->end()
+                        ->end()
                     ->end()
-                ->end() // twitter
+                ->end()
             ->end();
 
         return $treeBuilder;

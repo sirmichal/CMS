@@ -6,8 +6,8 @@ parameters:
 services:
     footer_service:
         class: AdminBundle\Service\FooterService
-        arguments: ['@form.factory', '@doctrine', '@session']
-
+        arguments: ['@form.factory', '@doctrine', '@session', '@service_container']
+        
     media_listener:
         class: AdminBundle\Service\MediaListenerService
         arguments: ['@kernel']
