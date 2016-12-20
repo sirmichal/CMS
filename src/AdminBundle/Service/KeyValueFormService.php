@@ -2,8 +2,8 @@
 
 namespace AdminBundle\Service;
 
-use AdminBundle\Entity\Footer;
-use AdminBundle\Form\FooterForm;
+use AdminBundle\Entity\KeyValue;
+use AdminBundle\Form\KeyValueForm;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FooterService
+class KeyValueFormService
 {
 
     /**
@@ -30,7 +30,7 @@ class FooterService
     private $session;
 
     /**
-     * @var \AdminBundle\Repository\FooterRepository
+     * @var \AdminBundle\Repository\KeyValueRepository
      */
     private $repo;
 
@@ -39,14 +39,18 @@ class FooterService
      */
     private $form;
 
+    private $container;
+
     private $config;
-    
-    private $footerEntities;
-    
+
+    private $entities;
+
     private $data;
 
+    private $formType;
+
     /**
-     * FooterService constructor.
+     * KeyValueFormService constructor.
      * @param FormFactory $factoryForm
      * @param Registry $doctrine
      * @param Session $session
@@ -57,10 +61,8 @@ class FooterService
         $this->factoryForm = $factoryForm;
         $this->doctrine = $doctrine;
         $this->session = $session;
-        $this->repo = $this->doctrine->getManager()->getRepository('AdminBundle:Footer');
-        $this->config = $container->getParameter('admin')['footer_form'];
-        
-        $this->readDataFromDb();
+        $this->container = $container;
+        $this->repo = $this->doctrine->getManager()->getRepository('AdminBundle:KeyValue');
     }
 
     /**
@@ -68,9 +70,9 @@ class FooterService
      */
     public function createForm()
     {
-        $this->form = $this->factoryForm->create(FooterForm::class, null, array('footer_service' => $this));
-        
-        foreach ($this->footerEntities as $ent) {
+        $this->form = $this->factoryForm->create(KeyValueForm::class, null, array('config' => $this->config));
+
+        foreach ($this->entities as $ent) {
             $attr = $ent->getAttr();
             $value = $ent->getValue();
 
@@ -95,13 +97,18 @@ class FooterService
     {
         $em = $this->doctrine->getManager();
         $formData = $this->form->getData();
-        
+
         foreach ($this->config as $field) {
-            $em->createQuery('DELETE FROM AdminBundle:Footer')->execute();
-            
+            $this->repo->createQueryBuilder('f')
+                    ->delete()
+                    ->where('f.form = :form')
+                    ->setParameter('form', $this->formType)
+                    ->getQuery()
+                    ->execute();
+
             $attr = $field['name'];
             $value = $formData[$attr];
-            $ent = new Footer($attr, $value);
+            $ent = new KeyValue($this->formType, $attr, $value);
             $em->persist($ent);
         }
         $em->flush();
@@ -113,9 +120,9 @@ class FooterService
             $attr = $field['name'];
             $ent = $this->repo->findOneByAttr($attr);
             if (null == $ent) {
-                $ent = new Footer($attr);
+                $ent = new KeyValue($this->formType, $attr);
             }
-            $this->footerEntities[$attr] = $ent;
+            $this->entities[$attr] = $ent;
             $this->data[$attr] = $ent->getValue();
         }
     }
@@ -123,8 +130,15 @@ class FooterService
     public function getConfig() {
         return $this->config;
     }
-    
-    public function getData() {
+
+    public function getData($formType) {
+        $this->setFormType($formType);
         return $this->data;
+    }
+
+    public function setFormType($formType) {
+        $this->formType = $formType;
+        $this->config = $this->container->getParameter('admin')['forms'][$formType];
+        $this->readDataFromDb();
     }
 }

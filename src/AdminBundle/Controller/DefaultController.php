@@ -100,9 +100,10 @@ class DefaultController extends Controller
      */
     public function footerAction(Request $request)
     {
-        $footerService = $this->get("footer_service");
-        $form = $footerService->createForm();
-        $footerService->submit($request);
+        $keyValueFormService = $this->get('key_value_form');
+        $keyValueFormService->setFormType('footer');
+        $form = $keyValueFormService->createForm();
+        $keyValueFormService->submit($request);
 
         return $this->render('AdminBundle:Default:footer.html.twig', array('form' => $form->createView()));
     }

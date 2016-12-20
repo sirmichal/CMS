@@ -27,7 +27,7 @@ class DefaultController extends Controller
         $subscribeEmailForm = $this->createSubscribeEmailForm();
 
         return $this->render('BlogBundle::index.html.twig', array(
-            'footer' => $this->get("footer_service")->getData(),
+            'footer' => $this->get("key_value_form")->getData('footer'),
             'sliders' => $sliders,
             'categories' => $categories,
             'form' => $subscribeEmailForm->createView(),

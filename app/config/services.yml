@@ -4,10 +4,10 @@ parameters:
 #    parameter_name: value
 
 services:
-    footer_service:
-        class: AdminBundle\Service\FooterService
+    key_value_form:
+        class: AdminBundle\Service\KeyValueFormService
         arguments: ['@form.factory', '@doctrine', '@session', '@service_container']
-        
+
     media_listener:
         class: AdminBundle\Service\MediaListenerService
         arguments: ['@kernel']

@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Footer
  *
- * @ORM\Table(name="footer")
- * @ORM\Entity(repositoryClass="AdminBundle\Repository\FooterRepository")
+ * @ORM\Table(name="key_value")
+ * @ORM\Entity(repositoryClass="AdminBundle\Repository\KeyValueRepository")
  */
-class Footer
+class KeyValue
 {
     /**
      * @var int
@@ -24,24 +24,33 @@ class Footer
     /**
      * @var string
      *
-     * @ORM\Column(name="attr", type="string", length=255, nullable=true)
+     * @ORM\Column(name="form", type="string", length=255)
+     */
+    private $form;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="attr", type="string", length=255)
      */
     private $attr;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", length=255)
+     * @ORM\Column(name="value", type="string", length=255, nullable=true)
      */
     private $value;
 
     /**
      * Footer constructor.
+     * @param string $form
      * @param string $attr
      * @param string $value
      */
-    public function __construct($attr = "", $value = "")
+    public function __construct($form = "", $attr = "", $value = "")
     {
+        $this->form = $form;
         $this->attr = $attr;
         $this->value = $value;
     }
@@ -61,7 +70,7 @@ class Footer
      *
      * @param string $attr
      *
-     * @return Footer
+     * @return KeyValue
      */
     public function setAttr($attr)
     {
@@ -85,7 +94,7 @@ class Footer
      *
      * @param string $value
      *
-     * @return Footer
+     * @return KeyValue
      */
     public function setValue($value)
     {
@@ -103,5 +112,28 @@ class Footer
     {
         return $this->value;
     }
+
+    /**
+     * Set form
+     *
+     * @param string $form
+     *
+     * @return KeyValue
+     */
+    public function setForm($form) {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    /**
+     * Get form
+     *
+     * @return string
+     */
+    public function getForm() {
+        return $this->form;
+    }
+
 }
 
