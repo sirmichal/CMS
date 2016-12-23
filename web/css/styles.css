@@ -2,9 +2,12 @@
 /* ***** COMMON ***** */
 /* ************************** */
 
-*, *:before, *:after {
-    box-sizing: border-box;
+* {
     font-family: 'Noto Sans', sans-serif;
+}
+
+body {
+    padding-top: 200px;
 }
 
 .row-buffer-top-bottom {
@@ -29,22 +32,27 @@ a:link {
     text-decoration: none;
 }
 
+.width-100-percent {
+    width: 100%;
+    display: table !important;
+}
+
 /* ************************** */
 /* ***** NAVIGATION BAR ***** */
 /* ************************** */
 
 nav.navbar-wrapper {
     height: 150px;
-    background-color: white;
+    background-color: yellow;
     border: 0;
-}
-
-.navbar-nav {
-    width: 100%;
 }
 
 #navigation-bar {
     background-color: white;
+}
+
+.navigation-link {
+    display: table-cell !important;
 }
 
 .social-icons-wrapper {
@@ -54,7 +62,7 @@ nav.navbar-wrapper {
 }
 
 .title-wrapper {
-    font-size: xx-large;
+    font-size: 400%;
     line-height: 80px;
     text-align: center;
     margin-left: auto;
@@ -66,14 +74,8 @@ img.social-icon {
     height: 25px;
 }
 
-hr.navbar-separator {
-    margin: 1em 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-}
-
-.categories {
-    text-align: center;
+#navigation-links-list {
+    width: 80%;
 }
 
 a.categories{
@@ -86,7 +88,6 @@ a.categories{
 }
 
 a.categories:hover {
-    color: darkred !important;
     font-size: x-large;
 }
 
@@ -133,11 +134,21 @@ a.categories:hover {
 
 .big-post-thumbnail {
     height: 45%;
+    overflow: hidden;
 }
 
-.big-post-thumbnail img.portrait {
-    width: 100%;
-    height: auto;
+.big-post-thumbnail-img {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+}
+
+.transition {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .big-post-category {
@@ -208,7 +219,6 @@ a.big-post-hyperlink:hover {
 
 .blog-info-author {
     height: 50%;
-
     background-image: url("../assets/img/blog-info-bg.jpg");
 }
 

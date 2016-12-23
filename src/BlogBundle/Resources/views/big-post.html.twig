@@ -2,7 +2,7 @@
     <div class="big-post text-center">
         <div class="big-post-thumbnail">
             {% if p.thumbnail is not null %}
-                <img class="cropped-center" src={{ asset('media/' ~ p.thumbnail.name) }}>
+                <img class="cropped-center big-post-thumbnail-img" src={{ asset('media/' ~ p.thumbnail.name) }}>
             {% endif %}
         </div>
         <div class="big-post-category text-uppercase">
