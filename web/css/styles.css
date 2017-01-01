@@ -51,10 +51,6 @@ nav.navbar-wrapper {
     background-color: white;
 }
 
-.navigation-link {
-    display: table-cell !important;
-}
-
 .social-icons-wrapper {
     line-height: 80px;
     position: absolute;
@@ -65,8 +61,7 @@ nav.navbar-wrapper {
     font-size: 400%;
     line-height: 80px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
 img.social-icon {
@@ -74,8 +69,9 @@ img.social-icon {
     height: 25px;
 }
 
-#navigation-links-list {
+.navigation-links-list {
     width: 80%;
+    height: 100%;
 }
 
 a.categories{
@@ -87,8 +83,9 @@ a.categories{
     transition: all 0.2s;
 }
 
-a.categories:hover {
-    font-size: x-large;
+.navigation-link {
+    float: left;
+    list-style-type: none;
 }
 
 /* ************************** */
