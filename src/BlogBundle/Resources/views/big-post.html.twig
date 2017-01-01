@@ -1,4 +1,4 @@
-<a class="big-post-hyperlink" href="http://onet.pl">
+<a href="http://onet.pl">
     <div class="big-post text-center">
         <div class="big-post-thumbnail">
             {% if p.thumbnail is not null %}
@@ -17,11 +17,8 @@
         <div class="big-post-content center-block">
             {{ p.content }}
         </div>
-        <div class="big-post-info">
+        <div class="big-post-info center-block">
             {{ p.user }} / {{ p.created | localizeddate('none', 'none', 'pl', null, "d MMMM Y, HH:mm") }}
-        </div>
-        <div class="big-post-read-more-btn">
-            <button class="btn btn-lg round">Więcej</button>
         </div>
     </div>
 </a>

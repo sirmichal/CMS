@@ -30,9 +30,6 @@ $('.big-post-content').each(function () {
     $(this).text(shortenedText);
 })
 
-// var navbar_items = $('.nav.navbar-nav li');
-// navbar_items.width(100/navbar_items.length + '%');
-
 $('.footer-arrow').click(function () {
     var body = $('body');
     body.stop().animate({ scrollTop: 0 }, '400', 'swing');
@@ -49,9 +46,44 @@ $('.sidebar-single-entry').hover(
     }
 );
 
-$('.big-post-thumbnail-img').hover(function() {
-    $(this).toggleClass('transition');
-
+$('.big-post').hover(function() {
+    $(this).find('.big-post-thumbnail-img').addClass('enlarge-big-post-img');
+    $(this).find('.big-post-title').css({'color': 'gray'});
 }, function() {
-    $(this).toggleClass('transition');
+    $(this).find('.big-post-thumbnail-img').removeClass('enlarge-big-post-img');
+    $(this).find('.big-post-title').css({'color': 'black'});
 });
+
+
+$(function(){
+    $('#menu').slicknav({
+        label: '',
+        brand: 'Michał Turemka - przykład nowego bloga'
+    });
+});
+
+
+$(function(){
+    $('nav').data('size','big');
+    $(window).scrollTop(0);
+});
+
+$(window).scroll(function () {
+    var scrollTop = $(window).scrollTop();
+    var animationTime = 150;
+    var nav = $("nav");
+    var title = nav.find("#nav-title-wrapper");
+    if (nav.data("size") == "big" && scrollTop > 100) {
+        nav.data("size", "small");
+        nav.stop().animate({"height": 80}, animationTime);
+        title.stop().fadeOut(animationTime);
+        console.log("Minified navbar");
+    }
+    else if (nav.data("size") == "small" && scrollTop <= 100) {
+        nav.data("size", "big");
+        nav.stop().animate({"height": 150}, animationTime);
+        title.stop().fadeIn(animationTime);
+        console.log("Maxified navbar");
+    }
+});
+
