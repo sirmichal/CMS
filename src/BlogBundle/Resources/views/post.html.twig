@@ -1,0 +1,9 @@
+{% extends "BlogBundle::index.html.twig" %}
+
+{% block content %}
+    <div class="post row-buffer-top-bottom">
+        <img class="post-img cropped-center" src={{ asset('media/' ~ post.thumbnail.name) }}>
+        <p class="post-title text-center">{{ post.title }}</p>
+        <p class="post-content text-justify">{{ post.content }}</p>
+    </div>
+{% endblock %}

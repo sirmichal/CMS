@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="categories-single-entry-title text-uppercase">
-                        {{ c.name }}
+                        <a href={{ path('category', {'id': c.id}) }}>{{ c.name }}</a>
                     </div>
 
                     <div class="categories-single-entry-counter">

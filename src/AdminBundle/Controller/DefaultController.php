@@ -101,7 +101,7 @@ class DefaultController extends Controller
     public function footerAction(Request $request)
     {
         $keyValueFormService = $this->get('key_value_form');
-        $keyValueFormService->setFormType('footer');
+        $keyValueFormService->setFormType('literals');
         $form = $keyValueFormService->createForm();
         $keyValueFormService->submit($request);
 

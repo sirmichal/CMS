@@ -119,12 +119,7 @@ fos_js_routing:
 
 admin:
     forms:
-        footer:
-            - {name: 'street', label: 'Ulica:', placeholder: 'Wpisz ulicę'}
-            - {name: 'city', label: 'Miasto:', placeholder: 'Wpisz miasto'}
-            - {name: 'phone_number', label: 'Nr telefonu:', placeholder: 'Wpisz nr telefonu'}
-            - {name: 'postal_code', label: 'Kod pocztowy:', placeholder: 'Wpisz kod pocztowy'}
-        user:
-            - {name: 'aaa', label: 'vbvbvb:', placeholder: 'Wpisz ucvbcvbcvl'}
-            - {name: 'bbb', label: 'hjkhjk:', placeholder: 'Wpisz hjkghk'}
-
+        literals:
+            - {name: 'title', label: 'Tytuł strony:', placeholder: 'Wpisz tytuł strony:'}
+            - {name: 'author', label: 'Autor:', placeholder: 'Wpisz autora:'}
+            - {name: 'company', label: 'Firma:', placeholder: 'Wpisz nazwę firmy:'}

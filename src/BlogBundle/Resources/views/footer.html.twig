@@ -1,11 +1,8 @@
 <footer>
-    <div class="footer-arrow">
+    <div id="footer-arrow">
         &#8648
     </div>
-    <div class="footer-content">
-            {{ footer.city }} <br>
-            {{ footer.phone_number }} <br>
-            {{ footer.street }} <br>
-            {{ footer.postal_code }} <br>
+    <div id="footer-content">
+        &copy; {{ literals.author }} - {{ literals.company }} - {{ "now"|date("Y") }}
     </div>
 </footer>

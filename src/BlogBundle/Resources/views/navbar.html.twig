@@ -2,17 +2,17 @@
     <div class="container">
         <div class="row" id="nav-title-wrapper" >
             <div class="col-md-12 ">
-                <h1 class="site-title">Michał Turemka - przykład nowego bloga</h1>
+                <a class="site-title" href={{ path("homepage") }}>{{ literals.title }}</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <ul id="menu">
-                    <li class="navigation-link text-uppercase"><a href="#">item 1</a></li>
-                    <li class="navigation-link text-uppercase"><a href="#">item 2</a></li>
-                    <li class="navigation-link text-uppercase"><a href="#">item 3</a></li>
-                    <li class="navigation-link text-uppercase"><a href="#">item 4</a></li>
-                    <li class="navigation-link text-uppercase"><a href="#">item 5</a></li>
+                    {% for c in categories %}
+                        <li class="navigation-link text-uppercase">
+                            <a href={{ path("category", { "id": c.id }) }}>{{ c.name }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

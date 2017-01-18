@@ -1,24 +1,24 @@
-<a href="http://onet.pl">
-    <div class="big-post text-center">
-        <div class="big-post-thumbnail">
-            {% if p.thumbnail is not null %}
-                <img class="cropped-center big-post-thumbnail-img" src={{ asset('media/' ~ p.thumbnail.name) }}>
-            {% endif %}
-        </div>
-        <div class="big-post-category text-uppercase">
-            {% for c in p.categories %}
-                <a href="#">{{ c.category }}</a>
-                {% if loop.last == false %}&#8213{% endif %}
-            {% endfor %}
-        </div>
-        <div class="big-post-title center-block">
-            {{ p.title }}
-        </div>
-        <div class="big-post-content center-block">
-            {{ p.content }}
-        </div>
-        <div class="big-post-info center-block">
-            {{ p.user }} / {{ p.created | localizeddate('none', 'none', 'pl', null, "d MMMM Y, HH:mm") }}
-        </div>
+<div class="big-post text-center">
+    <a class="big-post-hyperlink" href={{ path("post", {"id": p.id}) }}></a>
+
+    <div class="big-post-thumbnail">
+        {% if p.thumbnail is not null %}
+            <img class="cropped-center big-post-thumbnail-img" src={{ asset('media/' ~ p.thumbnail.name) }}>
+        {% endif %}
     </div>
-</a>
+    <div class="big-post-category text-uppercase">
+        {% for c in p.categories %}
+            <a href={{ path("category", { "id": c.id }) }}>{{ c.category }}</a>
+            {% if loop.last == false %}&#8213{% endif %}
+        {% endfor %}
+    </div>
+    <div class="big-post-title center-block">
+        {{ p.title }}
+    </div>
+    <div class="big-post-content center-block">
+        {{ p.content }}
+    </div>
+    <div class="big-post-info center-block">
+        {{ p.user }} / {{ p.created | localizeddate('none', 'none', 'pl', null, "d MMMM Y, HH:mm") }}
+    </div>
+</div>

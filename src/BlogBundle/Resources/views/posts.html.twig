@@ -4,17 +4,17 @@
     {% if posts[i] is defined %}
         <div class="row row-buffer-top-bottom">
             <div class="col-md-12">
-                {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i]} only %}
+                {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i], 'index' : i} only %}
             </div>
         </div>
         {% if posts[i + 1] is defined %}
             <div class="row row-buffer-top-bottom">
                 <div class="col-md-6">
-                    {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i+1]} only %}
+                    {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i+1], 'index' : i+1} only %}
                 </div>
                 {% if posts[i+2] is defined %}
                     <div class="col-md-6">
-                        {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i+2]} only %}
+                        {% include 'BlogBundle::big-post.html.twig' with {'p' : posts[i+2], 'index' : i+2} only %}
                     </div>
                 {% endif %}
             </div>

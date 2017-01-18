@@ -74,19 +74,8 @@ nav {
     list-style-type: none;
 }
 
-.navigation-link:not(:first-child):not(:last-child) {
-    /*margin: 0 4%;*/
-}
-.navigation-link:first-child {
-    /*margin-right: 4%;*/
-}
-.navigation-link:last-child {
-    /*margin-left: 4%;*/
-}
-
 .navigation-link a {
-    /*color: black;*/
-    font-size: large;
+    font-size: medium;
 }
 
 #menu {
@@ -98,6 +87,7 @@ nav {
 .site-title {
     font-size: 350%;
     font-family: 'Kaushan Script', cursive;
+    text-transform: none;
 }
 
 /* ************************** */
@@ -108,14 +98,22 @@ nav {
     background-color: #F9F9F9;
     width: 100%;
     height: 650px;
-    position: relative;
-    overflow: hidden;
     color: black;
 }
 
 .big-post-thumbnail {
     height: 45%;
     overflow: hidden;
+}
+
+.big-post-hyperlink {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .big-post-thumbnail-img {
@@ -134,20 +132,24 @@ nav {
 
 .big-post-category {
     margin: 30px 0;
+    width: 100%;
+    height: 20px;
 }
 
 .big-post-category a {
     font-size: small;
     font-weight: bold;
     color: black;
+    position: relative;
+    z-index: 1;
 }
 
 .big-post-category a:hover{
-    color: #337ab7
+    color: rgb(68, 112, 151);
 }
 
 .big-post-title {
-    font-size: x-large;
+    font-size: 1.8em;
     letter-spacing: 1px;
     font-weight: bold;
     width: 80%;
@@ -156,7 +158,7 @@ nav {
 }
 
 .big-post-content {
-    font-size: small;
+    font-size: 1em;
     overflow: hidden;
     position: relative;
     width: 80%;
@@ -279,7 +281,12 @@ img.img-author {
     background-color: white;
     flex-basis: 70%;
     padding-left: 15px;
+
 }
+.categories-single-entry-title a{
+    color: black;
+}
+
 
 .categories-single-entry-counter {
     background-color: grey;
@@ -324,23 +331,53 @@ footer {
     width: 100%;
     height: 200px;
     position: relative;
+    text-align: center;
 }
 
-.footer-arrow {
-    width: 50px;
-    height: 80px;
-    background-color: rgb(79, 188, 132);
-    position: relative;
+#footer-arrow {
+    background-color: rgb(68, 112, 151);
+    position: absolute;
     top: -40px;
+    width: 50px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    left: 0;
+    right: 0;
+    padding: 15px 10px;
     color: white;
     font-size: xx-large;
 }
 
-.footer-content {
+#footer-content {
     position: absolute;
-    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 100px;
+    color: grey;
+}
+
+/* ************************** */
+/* ********** POST ********** */
+/* ************************** */
+.post-img {
+    height: 400px;
+}
+
+p.post-title {
+    font-size: xx-large;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 40px 0;
+}
+
+p.post-content {
+    padding: 0 20px;
+    font-size: 1.1em;
+}
+
+.post {
+    background-color: #F9F9F9;
+    width: 100%;
+    color: black;
+    padding-bottom: 15px;
 }

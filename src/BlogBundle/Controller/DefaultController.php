@@ -5,6 +5,7 @@ namespace BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use BlogBundle\Form\SubscriberForm;
 use BlogBundle\Entity\Subscriber;
@@ -19,19 +20,56 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $this->doctrine = $this->getDoctrine();
-        $sliders = $this->doctrine->getRepository('AdminBundle:Slider')->findAll();
         $posts = $this->doctrine->getRepository('AdminBundle:Post')->findAll();
-
         $categories = $this->getCategoriesData();
-
         $subscribeEmailForm = $this->createSubscribeEmailForm();
 
         return $this->render('BlogBundle::index.html.twig', array(
-            'footer' => $this->get("key_value_form")->getData('footer'),
-            'sliders' => $sliders,
+            'literals' => $this->get("key_value_form")->getData('literals'),
             'categories' => $categories,
             'form' => $subscribeEmailForm->createView(),
             'posts' => $posts
+        ));
+    }
+
+    /**
+     * @Route("/category/{id}", name="category", requirements={"id": "\d+"} )
+     * @param $id
+     * @return Response
+     */
+    public function categoryAction($id)
+    {
+        $this->doctrine = $this->getDoctrine();
+        $qb = $this->doctrine->getRepository('AdminBundle:Post')->createQueryBuilder('p');
+        $posts = $qb->join('p.categories', 'c', 'WITH', 'c.id = :id')->setParameter('id', $id)->getQuery()->getResult();
+        $categories = $this->getCategoriesData();
+        $subscribeEmailForm = $this->createSubscribeEmailForm();
+
+        return $this->render('BlogBundle::index.html.twig', array(
+            'literals' => $this->get("key_value_form")->getData('literals'),
+            'categories' => $categories,
+            'form' => $subscribeEmailForm->createView(),
+            'posts' => $posts
+        ));
+    }
+
+    /**
+     * @Route("/post/{id}", name="post", requirements={"id": "\d+"} )
+     * @param $id
+     * @return Response
+     */
+    public function postAction($id)
+    {
+        $this->doctrine = $this->getDoctrine();
+        $post = $this->doctrine->getRepository('AdminBundle:Post')->findOneById($id);
+        $categories = $this->getCategoriesData();
+        $subscribeEmailForm = $this->createSubscribeEmailForm();
+
+        return $this->render('BlogBundle::post.html.twig', array(
+            'literals' => $this->get("key_value_form")->getData('literals'),
+            'categories' => $categories,
+            'form' => $subscribeEmailForm->createView(),
+            'post' => $post
         ));
     }
 
@@ -66,6 +104,7 @@ class DefaultController extends Controller
 
         $categories = array();
         foreach($categoryEntities as $c) {
+            $entry['id'] = $c->getId();
             $entry['name'] = $c->getCategory();
             $entry['posts_counter'] = $c->getPosts()->count();
             $categories[] = $entry;
