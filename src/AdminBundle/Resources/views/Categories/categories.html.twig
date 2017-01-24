@@ -16,16 +16,17 @@
             {% for c in categories %}
                 <tr class="edit-row">
                     <td>{{ c.category }}<br>
-                        <a href={{ path('delete_category', {'id': c.id}) }}>Usuń</a></td>
+                        <a href={{ path('categories_edit', {'id': c.id}) }}>Edytuj</a>
+                        <a href={{ path('categories_delete', {'id': c.id}) }}>Usuń</a>
+                    </td>
                 </tr>
             {% endfor %}
-
         </tbody>
     </table>
             
     {{ form_start(form) }}
     {{ form_widget(form.category) }}
-    <button type="submit" class="btn btn-primary">Dodaj</button>
+        <button type="submit" class="btn btn-primary">Zapisz</button>
     {{ form_end(form) }}
 {% endblock %}
 

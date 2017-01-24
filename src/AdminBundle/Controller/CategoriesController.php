@@ -18,7 +18,7 @@ class CategoriesController extends Controller {
     public function indexAction() {
         $categories = $this->getDoctrine()->getRepository('AdminBundle:Category')->findAll();
         $form = $this->createForm(NewCategoryForm::class, null, array(
-            'action' => $this->generateUrl('new_category')
+            'action' => $this->generateUrl('categories_add')
         ));
         
         return $this->render('AdminBundle:Categories:categories.html.twig', array(
@@ -27,7 +27,7 @@ class CategoriesController extends Controller {
     }
     
     /**
-     * @Route("category", name="new_category")
+     * @Route("category", name="categories_add")
      */
     public function newCategoryAction(Request $request) {
         $name = $request->request->get('new_category_form')['category'];
@@ -43,7 +43,7 @@ class CategoriesController extends Controller {
     }
 
     /**
-     * @Route("category/{id}/delete", name="delete_category", requirements={"id": "\d+"})
+     * @Route("category/delete/{id}", name="categories_delete", requirements={"id": "\d+"})
      * @param $id
      * @return Response
      */
@@ -57,5 +57,29 @@ class CategoriesController extends Controller {
 
         return $this->redirectToRoute('categories');
     }
+    
+    /**
+    * @Route("category/{id}", name="categories_edit", requirements={"id": "\d+"})
+    * @param Request $request
+    * @param $id
+    * @return Response
+    */
+    public function editAction(Request $request, $id) {
+        $repo = $this->getDoctrine()->getRepository('AdminBundle:Category');
+        $category = $repo->findOneById($id);
+        $form = $this->createForm(NewCategoryForm::class, $category);
+        
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $category->setCategory($form->get('category')->getData());
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('categories');
+        }
+        
+        $categories = $repo->findAll();
 
+        return $this->render('AdminBundle:Categories:categories.html.twig', array(
+            'categories' => $categories,
+            'form' => $form->createView()));
+    }
 }

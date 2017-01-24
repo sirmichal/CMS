@@ -22,7 +22,8 @@
             <tr class="edit-row">
                 <td>{{ post.title }}<br>
                     <a href={{ path('posts_edit', {'id': post.id}) }}>Edytuj</a>
-                    <a href={{ path('posts_delete', {'id': post.id}) }}>Usuń</a></td>
+                    <a href={{ path('posts_delete', {'id': post.id}) }}>Usuń</a>
+                </td>
                 <td class="text-justify">{{ post.content }}</td>
                 <td>
                     {% for c in post.categories %}
@@ -30,7 +31,7 @@
                     {% endfor %}
                 </td>
                 <td>{{ post.user }}</td>
-                <td>{{ post.created|date("d-M-Y H:i") }}</td>
+                <td>{{ post.created | localizeddate('none', 'none', 'pl', null, "d MMMM Y, HH:mm") }}</td>
             </tr>
         {% endfor %}
 

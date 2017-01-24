@@ -50,7 +50,7 @@ class PostsController extends Controller {
     }
 
     /**
-     * @Route("posts/{id}/delete", name="posts_delete", requirements={"id": "\d+"})
+     * @Route("posts/delete/{id}", name="posts_delete", requirements={"id": "\d+"})
      * @param $id
      * @return Response
      */

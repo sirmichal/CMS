@@ -19,6 +19,14 @@ class DefaultController extends Controller
     {
         return $this->render('AdminBundle:Default:home.html.twig');
     }
+    
+    /**
+     * @Route("settings", name="settings")
+     * @return Response
+     */
+    public function settingsAction() {
+        return $this->redirectToRoute('admin_homepage');
+    }
 
     /**
      * @Route("users", name="users")
@@ -41,9 +49,8 @@ class DefaultController extends Controller
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserBy(array('id' => $userId));
         $userManager->deleteUser($user);
-        $this->addFlash('delete', 'User deleted!');
 
-        return $this->redirectToRoute('users');
+        return $this->redirectToRoute('fos_user_security_logout');
     }
 
     /**
@@ -61,7 +68,7 @@ class DefaultController extends Controller
             $em->persist($media);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('media_library'));
+            return $this->redirectToRoute('media_library');
         }
         return $this->render('AdminBundle:Default:upload.html.twig', array('form' => $form->createView()));
     }
@@ -96,16 +103,16 @@ class DefaultController extends Controller
     /**
      * @param Request $request
      * @return Response
-     * @Route("footer", name="footer")
+     * @Route("literals", name="literals")
      */
-    public function footerAction(Request $request)
+    public function literalsAction(Request $request)
     {
         $keyValueFormService = $this->get('key_value_form');
         $keyValueFormService->setFormType('literals');
         $form = $keyValueFormService->createForm();
         $keyValueFormService->submit($request);
 
-        return $this->render('AdminBundle:Default:footer.html.twig', array('form' => $form->createView()));
+        return $this->render('AdminBundle:Default:literals.html.twig', array('form' => $form->createView()));
     }
 
     /**

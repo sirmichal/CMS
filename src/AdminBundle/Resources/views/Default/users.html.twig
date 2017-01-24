@@ -18,7 +18,7 @@
                             <td>{{ user.username }}<br>
                                 <a href={{ path('delete_user', {'userId': user.id}) }}>Usuń</a></td>
                             <td>{{ user.email }}</td>
-                            <td>{{ user.lastLogin | date("d-M-Y H:i") }}</td>
+                            <td>{{ user.lastLogin | localizeddate('none', 'none', 'pl', null, "d MMMM Y, HH:mm") }}</td>
                         </tr>
                     {% endfor %}
 

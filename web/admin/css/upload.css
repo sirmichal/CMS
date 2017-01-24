@@ -4,6 +4,7 @@ input {
 
 form[name=file_upload_form] {
     text-align: center;
+    position: relative;
 }
 
 #label-upload {
@@ -14,4 +15,14 @@ form[name=file_upload_form] {
     padding: 50px 0;
     margin: 100px auto;
     position: relative;
+}
+
+form[name=file_upload_form] #submit-upload {
+    width: 100%;   
+    position: absolute;
+    top: 550px;    
+}
+
+form[name=file_upload_form] #submit-upload button{
+    width: 300px;   
 }
