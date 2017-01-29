@@ -1,4 +1,7 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\DependencyInjection;
 
@@ -8,7 +11,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class AdminExtension extends Extension
 {
-
     /**
      * Loads a specific configuration.
      *

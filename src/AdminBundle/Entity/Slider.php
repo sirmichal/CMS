@@ -1,9 +1,11 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AdminBundle\Entity\Media;
 
 /**
  * Slider
@@ -38,15 +40,16 @@ class Slider
     {
         return $this->id;
     }
-    
-        /**
+
+    /**
      * Set thumbnail
      *
      * @param Media $media
      *
      * @return Slider
      */
-    public function setMedia(Media $media) {
+    public function setMedia(Media $media)
+    {
         $this->media = $media;
 
         return $this;
@@ -57,7 +60,8 @@ class Slider
      *
      * @return Media
      */
-    public function getMedia() {
+    public function getMedia()
+    {
         return $this->media;
     }
 

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Entity;
 
@@ -120,7 +123,8 @@ class KeyValue
      *
      * @return KeyValue
      */
-    public function setForm($form) {
+    public function setForm($form)
+    {
         $this->form = $form;
 
         return $this;
@@ -131,7 +135,8 @@ class KeyValue
      *
      * @return string
      */
-    public function getForm() {
+    public function getForm()
+    {
         return $this->form;
     }
 

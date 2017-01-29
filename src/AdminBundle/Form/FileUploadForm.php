@@ -1,23 +1,40 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class FileUploadForm extends AbstractType {
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+class FileUploadForm extends AbstractType
+{
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add('file', FileType::class);
     }
 
-    public function configureOptions(OptionsResolver $resolver) {
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
         $resolver->setDefaults(['data_class' => 'AdminBundle\Entity\Media']);
     }
 
-    public function getName() {
-        return 'app_bundle_file_upload_form';
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'admin_bundle_file_upload_form';
     }
 
 }

@@ -1,11 +1,13 @@
+{# Written by Michał Turemka <michal.turemka@gmail.com> #}
+
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta charset="UTF-8"> 
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>CMS</title>
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
             <link rel="stylesheet" href="{{ asset('admin/css/styles.css') }}">
@@ -31,7 +33,7 @@
                 </div>
             </div>
         {% endblock %}
-        
+
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.1.0.js') }}"></script>
             <script src="{{ asset('js/bootstrap.js') }}"></script>

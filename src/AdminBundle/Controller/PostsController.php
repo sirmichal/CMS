@@ -1,22 +1,27 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Entity\Post;
+use AdminBundle\Form\NewPostForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AdminBundle\Form\NewPostForm;
-use AdminBundle\Entity\Post;
 
-class PostsController extends Controller {
+class PostsController extends Controller
+{
 
     /**
      * @Route("posts/add", name="posts_add")
      * @param Request $request
      * @return Response
      */
-    public function addAction(Request $request) {
+    public function addAction(Request $request)
+    {
         $post = new Post();
         $form = $this->createForm(NewPostForm::class, $post);
         $form->handleRequest($request);
@@ -44,7 +49,8 @@ class PostsController extends Controller {
      * @Route("posts", name="posts")
      * @return Response
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $posts = $this->getDoctrine()->getRepository('AdminBundle:Post')->findAll();
         return $this->render('AdminBundle:Posts:posts.html.twig', array('posts' => $posts));
     }
@@ -54,7 +60,8 @@ class PostsController extends Controller {
      * @param $id
      * @return Response
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         $repo = $this->getDoctrine()->getRepository('AdminBundle:Post');
         $post = $repo->findOneById($id);
 
@@ -71,7 +78,8 @@ class PostsController extends Controller {
      * @param $id
      * @return Response
      */
-    public function editPostAction(Request $request, $id) {
+    public function editPostAction(Request $request, $id)
+    {
         $post = $this->getDoctrine()->getRepository('AdminBundle:Post')->findOneById($id);
         $form = $this->createForm(NewPostForm::class, $post);
 
@@ -102,7 +110,8 @@ class PostsController extends Controller {
      * @return Response
      * @Route("posts/modal/add-img/render", name="posts_modal_add_img_render")
      */
-    public function modalAddImgRenderAction() {
+    public function modalAddImgRenderAction()
+    {
         $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
         $view = $this->renderView('AdminBundle:Modal/Posts:add.html.twig', array(
             'media' => $media));

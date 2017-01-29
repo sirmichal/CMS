@@ -1,15 +1,19 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Service;
 
 use AdminBundle\Entity\KeyValue;
 use AdminBundle\Form\KeyValueForm;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class KeyValueFormService
 {
@@ -66,7 +70,7 @@ class KeyValueFormService
     }
 
     /**
-     * @return Form|\Symfony\Component\Form\FormInterface
+     * @return Form|FormInterface
      */
     public function createForm()
     {
@@ -93,6 +97,9 @@ class KeyValueFormService
         }
     }
 
+    /**
+     *
+     */
     private function saveDataToDb()
     {
         $em = $this->doctrine->getManager();
@@ -100,11 +107,11 @@ class KeyValueFormService
 
         foreach ($this->config as $field) {
             $this->repo->createQueryBuilder('f')
-                    ->delete()
-                    ->where('f.form = :form')
-                    ->setParameter('form', $this->formType)
-                    ->getQuery()
-                    ->execute();
+                ->delete()
+                ->where('f.form = :form')
+                ->setParameter('form', $this->formType)
+                ->getQuery()
+                ->execute();
 
             $attr = $field['name'];
             $value = $formData[$attr];
@@ -114,6 +121,9 @@ class KeyValueFormService
         $em->flush();
     }
 
+    /**
+     *
+     */
     private function readDataFromDb()
     {
         foreach ($this->config as $field) {
@@ -127,16 +137,29 @@ class KeyValueFormService
         }
     }
 
-    public function getConfig() {
+    /**
+     * @return mixed
+     */
+    public function getConfig()
+    {
         return $this->config;
     }
 
-    public function getData($formType) {
+    /**
+     * @param $formType
+     * @return mixed
+     */
+    public function getData($formType)
+    {
         $this->setFormType($formType);
         return $this->data;
     }
 
-    public function setFormType($formType) {
+    /**
+     * @param $formType
+     */
+    public function setFormType($formType)
+    {
         $this->formType = $formType;
         $this->config = $this->container->getParameter('admin')['forms'][$formType];
         $this->readDataFromDb();

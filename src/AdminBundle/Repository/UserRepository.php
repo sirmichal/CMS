@@ -1,4 +1,7 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Repository;
 use Doctrine\ORM\EntityRepository;

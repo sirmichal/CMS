@@ -1,3 +1,5 @@
+{# Written by Michał Turemka <michal.turemka@gmail.com> #}
+
 {% extends 'AdminBundle::base.html.twig' %}
 {% form_theme form _self %}
 
@@ -20,10 +22,10 @@
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %} id="label-upload">{{ label|raw }}</label>
     {% endspaceless %}
 {% endblock %}
-        
+
 {% block content %}
     <div class="row">
-        
+
             {{ form_start(form) }}
                 {{ form_row(form.file) }}
                 <div id="filename-upload"></div>
@@ -31,7 +33,7 @@
                     <button type="submit" class="btn btn-primary btn-lg">Wyślij</button>
                 </div>
             {{ form_end(form) }}
-        
+
     </div>
 {% endblock %}
 

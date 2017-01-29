@@ -1,9 +1,12 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AdminBundle\Entity\Post;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Category
@@ -28,16 +31,17 @@ class Category
      * @ORM\Column(name="category", type="string", length=255, unique=true)
      */
     private $category;
-    
+
     /**
      * @var Post
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Post", mappedBy="categories")
      */
     private $posts;
 
-    public function __construct() {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
     }
 
     /**
@@ -73,15 +77,15 @@ class Category
     {
         return $this->category;
     }
-    
+
     /**
      * Get posts
-     * 
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @return ArrayCollection
      */
     public function getPosts()
     {
-        return $this->posts; 
+        return $this->posts;
     }
 
 }

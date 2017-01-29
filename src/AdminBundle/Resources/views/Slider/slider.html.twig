@@ -1,21 +1,23 @@
+{# Written by Michał Turemka <michal.turemka@gmail.com> #}
+
 {% extends 'AdminBundle:Slider:base.html.twig' %}
 
 {% block content %}
     <div class="row">
         <h3>Aktualny slider</h3>
     </div>
-    
+
     <div class="row">
         {% for s in slider %}
             <img class="slider-img" data-id={{ s.media.id }} src="{{ (asset('media/') ~ s.media.name) | imagine_filter('thumbnails_large') }}">
         {% endfor %}
     </div>
-    
+
     <div class="row">
         <button class="btn btn-primary" id="add-img-btn" data-toggle="modal" data-target="#add-img-modal">Dodaj obrazki do slidera</button>
         <button class="btn btn-danger" id="delete-img-btn">Usuń obrazki ze slidera</button>
     </div>
-    
+
     <div id="add-img-modal" class="modal fade" role="dialog">
     </div>
 {% endblock %}

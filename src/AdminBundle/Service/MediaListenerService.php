@@ -1,4 +1,7 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Service;
 
@@ -9,9 +12,9 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 
 class MediaListenerService implements EventSubscriberInterface {
-    
+
     private $kernel;
-    
+
     public function __construct($kernel) {
         $this->kernel = $kernel;
     }
@@ -31,7 +34,10 @@ class MediaListenerService implements EventSubscriberInterface {
     public function postUpload(VichEvent\Event $event) {
         $this->createCache($event->getObject()->getName());
     }
-    
+
+    /**
+     * @param $name
+     */
     private function createCache($name) {
         $application = new Application($this->kernel);
         $application->setAutoExit(false);

@@ -1,12 +1,15 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use AdminBundle\Entity\Slider;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Media
@@ -16,7 +19,8 @@ use AdminBundle\Entity\Slider;
  * @ORM\HasLifecycleCallbacks()
  * @Vich\Uploadable
  */
-class Media {
+class Media
+{
 
     /**
      * @ORM\Id
@@ -42,21 +46,23 @@ class Media {
      * @var \DateTime
      */
     private $updatedAt;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Slider", mappedBy="media")
      */
     private $sliders;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->sliders = new ArrayCollection();
     }
-    
+
     /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
-     * @return Product
+     * @param File|UploadedFile $file
+     * @return Media
      */
-    public function setFile(File $file = null) {
+    public function setFile(File $file = null)
+    {
         $this->file = $file;
         if ($file) {
             $this->updatedAt = new \DateTime('now');
@@ -67,15 +73,17 @@ class Media {
     /**
      * @return File|null
      */
-    public function getFile() {
+    public function getFile()
+    {
         return $this->file;
     }
 
     /**
      * @param string $name
-     * @return Product
+     * @return Media
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
@@ -83,7 +91,8 @@ class Media {
     /**
      * @return string|null
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 

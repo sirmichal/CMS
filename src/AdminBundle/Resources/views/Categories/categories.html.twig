@@ -1,3 +1,5 @@
+{# Written by Michał Turemka <michal.turemka@gmail.com> #}
+
 {% extends 'AdminBundle::base.html.twig' %}
 
 {% block stylesheets %}
@@ -23,7 +25,7 @@
             {% endfor %}
         </tbody>
     </table>
-            
+
     {{ form_start(form) }}
     {{ form_widget(form.category) }}
         <button type="submit" class="btn btn-primary">Zapisz</button>

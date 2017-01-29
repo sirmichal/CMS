@@ -1,20 +1,25 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Entity\Slider;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AdminBundle\Entity\Slider;
 
-class SliderController extends Controller {
+class SliderController extends Controller
+{
 
     /**
      * @Route("slider", name="slider")
      * @return Response
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $qb = $em->getRepository('AdminBundle:Media')->createQueryBuilder('m');
@@ -25,33 +30,36 @@ class SliderController extends Controller {
 
         return $this->render('AdminBundle:Slider:slider.html.twig', array('media' => $media, 'slider' => $slider));
     }
-    
+
     /**
      * @Route("slider/modal/add-img/submit", name="slider_modal_add_img_submit")
+     * @param Request $request
      * @return Response
      */
-    public function modalAddImgSubmitAction(Request $request) {
+    public function modalAddImgSubmitAction(Request $request)
+    {
         $ids = json_decode(html_entity_decode($request->request->get('ids')));
         $em = $this->getDoctrine()->getManager();
         $mediaRepo = $em->getRepository('AdminBundle:Media');
-        
+
         foreach ($ids as $id) {
             $slider = new Slider();
             $media = $mediaRepo->findOneById($id);
             $slider->setMedia($media);
             $em->persist($slider);
         }
-        
+
         $em->flush();
-        
+
         return new Response();
     }
-    
+
     /**
      * @return Response
      * @Route("slider/modal/add-img/render", name="slider_modal_add_img_render")
      */
-    public function modalAddImgRenderAction() {
+    public function modalAddImgRenderAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->getRepository('AdminBundle:Media')->createQueryBuilder('m');
         $query = $qb->where('m.sliders IS EMPTY')->getQuery();
@@ -63,10 +71,12 @@ class SliderController extends Controller {
     }
 
     /**
+     * @param Request $request
      * @return Response
      * @Route("slider/delete-img", name="slider_delete_img")
      */
-    public function deleteImgAction(Request $request) {
+    public function deleteImgAction(Request $request)
+    {
         $ids = json_decode(html_entity_decode($request->request->get('ids')));
         $em = $this->getDoctrine()->getManager();
         $sliderRepo = $em->getRepository('AdminBundle:Slider');

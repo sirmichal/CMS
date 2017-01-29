@@ -1,11 +1,15 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace AdminBundle\Controller;
 
-use AdminBundle\Form\FileUploadForm;
 use AdminBundle\Entity\Media;
+use AdminBundle\Form\FileUploadForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,12 +23,13 @@ class DefaultController extends Controller
     {
         return $this->render('AdminBundle:Default:home.html.twig');
     }
-    
+
     /**
      * @Route("settings", name="settings")
      * @return Response
      */
-    public function settingsAction() {
+    public function settingsAction()
+    {
         return $this->redirectToRoute('admin_homepage');
     }
 
@@ -42,7 +47,7 @@ class DefaultController extends Controller
     /**
      * @Route("delete/{userId}", name="delete_user", requirements={"userId": "\d+"})
      * @param $userId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction($userId)
     {
@@ -56,7 +61,7 @@ class DefaultController extends Controller
     /**
      * @Route("upload", name="upload")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function uploadAction(Request $request)
     {
@@ -76,7 +81,8 @@ class DefaultController extends Controller
     /**
      * @Route("media/library", name="media_library")
      */
-    public function mediaLibraryAction() {
+    public function mediaLibraryAction()
+    {
         $mediaFiles = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findAll();
 
         return $this->render('AdminBundle:Default:media_library.html.twig', array('files' => $mediaFiles));
@@ -86,7 +92,8 @@ class DefaultController extends Controller
      * @Route("media/delete/{mediaId}", name="delete_media", requirements={"mediaId": "\d+"})
      * @return Response
      */
-    public function deleteMediaAction($mediaId) {
+    public function deleteMediaAction($mediaId)
+    {
         $mediaRepo = $this->getDoctrine()->getRepository('AdminBundle:Media');
         $media = $mediaRepo->findOneById($mediaId);
 
@@ -120,7 +127,8 @@ class DefaultController extends Controller
      * @return Response
      * @Route("getModal", name="get_modal")
      */
-    public function getModalAction(Request $request) {
+    public function getModalAction(Request $request)
+    {
         $id = $request->query->get('id');
 
         /** @var Media $media */
@@ -136,10 +144,10 @@ class DefaultController extends Controller
         $info['size'] = filesize('media/' . $media->getName());
 
         $view = $this->renderView('AdminBundle:Modal/Media:library.html.twig',
-                array(
-                    'media'         => $media,
-                    'info'          => $info,
-                    'preview_path'  => $preview_path));
+            array(
+                'media' => $media,
+                'info' => $info,
+                'preview_path' => $preview_path));
         return new Response($view);
     }
 
@@ -148,7 +156,8 @@ class DefaultController extends Controller
      * @return Response
      * @Route("media/cache", name="get_media_specific_cache")
      */
-    public function getMediaSpecificCacheAction(Request $request) {
+    public function getMediaSpecificCacheAction(Request $request)
+    {
         $id = $request->query->get('id');
         $filter = $request->query->get('filter');
 
