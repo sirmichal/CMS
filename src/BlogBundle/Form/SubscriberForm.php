@@ -1,20 +1,33 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace BlogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\FormBuilderInterface;
 
-class SubscriberForm extends AbstractType {
+class SubscriberForm extends AbstractType
+{
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add('email', EmailType::class, [
             'label' => false,
             'attr' => array('placeholder' => 'Wpisz swój email')]);
     }
 
-    public function getName() {
+    /**
+     * @return string
+     */
+    public function getName()
+    {
         return 'blog_bundle_subscriber_form';
     }
 

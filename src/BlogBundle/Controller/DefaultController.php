@@ -1,14 +1,17 @@
 <?php
+/**
+ * Written by Michał Turemka <michal.turemka@gmail.com>
+ */
 
 namespace BlogBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use BlogBundle\Form\SubscriberForm;
 use BlogBundle\Entity\Subscriber;
+use BlogBundle\Form\SubscriberForm;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -73,7 +76,11 @@ class DefaultController extends Controller
         ));
     }
 
-    private function createSubscribeEmailForm() {
+    /**
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createSubscribeEmailForm()
+    {
         $subscriber = new Subscriber();
         $form = $this->createForm(SubscriberForm::class, $subscriber, array(
             'action' => $this->generateUrl('new_subscriber')
@@ -86,9 +93,10 @@ class DefaultController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function newSubscriberAction(Request $request) {
+    public function newSubscriberAction(Request $request)
+    {
         $email = $request->request->get('subscriber_form')['email'];
-        if(null != $email) {
+        if (null != $email) {
             $subscriber = new Subscriber();
             $subscriber->setEmail($email);
             $em = $this->getDoctrine()->getManager();
@@ -99,11 +107,15 @@ class DefaultController extends Controller
         return $this->redirectToRoute('homepage');
     }
 
-    private function getCategoriesData() {
+    /**
+     * @return array
+     */
+    private function getCategoriesData()
+    {
         $categoryEntities = $this->doctrine->getRepository('AdminBundle:Category')->findAll();
 
         $categories = array();
-        foreach($categoryEntities as $c) {
+        foreach ($categoryEntities as $c) {
             $entry['id'] = $c->getId();
             $entry['name'] = $c->getCategory();
             $entry['posts_counter'] = $c->getPosts()->count();
