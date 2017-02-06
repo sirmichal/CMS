@@ -18,7 +18,7 @@
         {% if required %}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
         {% endif %}
-        {% set label = '<img src=' ~ asset('assets/img/upload.png') ~ '/>' %}
+        {% set label = '<img src=' ~ asset('assets/img/upload.png') ~ '>' %}
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %} id="label-upload">{{ label|raw }}</label>
     {% endspaceless %}
 {% endblock %}

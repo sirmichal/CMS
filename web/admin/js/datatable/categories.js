@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#categories-table').dataTable({
         lengthMenu: [5, 10, 25, 50],
         bLengthChange: false,
+        sDom:'<"top">rt<"bottom"ifp><"clear">',
         language: {
             "processing": "Przetwarzanie...",
             "search": "Szukaj:",

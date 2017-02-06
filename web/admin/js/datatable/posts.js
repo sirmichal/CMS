@@ -3,6 +3,7 @@ $(document).ready(function () {
         lengthMenu: [5, 10, 25, 50],
         bLengthChange: false,
         order: [[3, "asc"]],
+        sDom:'<"top">rt<"bottom"ifp><"clear">',
         language: {
             "processing": "Przetwarzanie...",
             "search": "Szukaj:",
