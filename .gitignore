@@ -1,17 +1,5 @@
-# Cache and logs (Symfony2)
-/app/cache/*
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-
-# Email spool folder
-/app/spool/*
-
 # Cache, session files and logs (Symfony3)
 var/
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-!var/sessions/.gitkeep
 
 # Parameters
 /app/config/parameters.yml
@@ -24,22 +12,11 @@ var/
 !bin/symfony_requirements
 /vendor/
 
+# Managed by npm
+/node_modules
+
 # Assets and user uploads
 /web/bundles/
-/web/uploads/
-
-# Assets managed by Bower
-/web/assets/vendor/
-
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
-# Build data
-/build/
-
-# Composer PHAR
-/composer.phar
 
 # Backup entities generated with doctrine:generate:entities command
 */Entity/*~
@@ -47,3 +24,6 @@ var/
 # IDE
 /nbproject
 /.idea
+
+# gulp things
+.ftppass

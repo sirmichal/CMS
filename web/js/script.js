@@ -61,7 +61,7 @@ $('.big-post').hover(function() {
 $(function(){
     $('#menu').slicknav({
         label: '',
-        brand: 'Michał Turemka - przykład nowego bloga'
+        brand: 'Michał Turemka - nowy blog'
     });
 });
 

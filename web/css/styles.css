@@ -213,7 +213,7 @@ p.author-paragraph {
 
 img.img-author {
     position: absolute;
-    z-index: 100;
+    z-index: 80;
     top: 8vw; /* half of the .blog-info-section height - half of the width */
     left: calc(50% - 5vw);
     width: 10vw;
