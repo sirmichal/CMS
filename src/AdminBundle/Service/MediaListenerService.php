@@ -6,17 +6,17 @@
 namespace AdminBundle\Service;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Vich\UploaderBundle\Event as VichEvent;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 
 class MediaListenerService implements EventSubscriberInterface {
 
-    private $kernel;
+    private $imagineController;
+    private $imagineFilterConfiguration;
 
-    public function __construct($kernel) {
-        $this->kernel = $kernel;
+    public function __construct($imagineController, $imagineFilterConfiguration) {
+        $this->imagineController = $imagineController;
+        $this->imagineFilterConfiguration = $imagineFilterConfiguration;
     }
 
     /**
@@ -39,16 +39,10 @@ class MediaListenerService implements EventSubscriberInterface {
      * @param $name
      */
     private function createCache($name) {
-        $application = new Application($this->kernel);
-        $application->setAutoExit(false);
-
-        $input = new ArrayInput(array(
-            'command' => 'liip:imagine:cache:resolve',
-            'paths' => array('media/' . $name)
-        ));
-
-        $output = new NullOutput();
-        $application->run($input, $output);
+        $path = 'media/' . $name;
+        $filters = array_keys($this->imagineFilterConfiguration->all());
+        foreach ($filters as $filter) {
+            $this->imagineController->filterAction(new Request(), $path, $filter);
+        }
     }
-
 }

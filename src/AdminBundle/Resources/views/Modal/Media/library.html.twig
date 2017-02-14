@@ -5,13 +5,13 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-10">
-                    <img class="img-responsive" id="single-img" src={{ preview_path }}>
+                    <img class="img-responsive" id="single-img" ng-src="{*{ ctrl.img.cacheImagePath }*}">
                 </div>
                 <div class="col-md-2">
-                    <p><b>Wielkość:</b> {{ info.width }} x {{ info.height }}</p>
-                    <p><b>Rozmiar:</b> {{ info.size }}</p>
-                    <p><b>Typ:</b> {{ info.mime }}</p>
-                    <a href={{ path('delete_media', {mediaId: media.id})}}>Usuń</a>
+                    <p><b>Wielkość:</b> {*{ ctrl.img.width }*} x {*{ ctrl.img.height }*}</p>
+                    <p><b>Rozmiar:</b> {*{ ctrl.img.size }*}b</p>
+                    <p><b>Typ:</b> {*{ ctrl.img.mime }*}</p>
+                    <a ng-click="ctrl.deleteImg(ctrl.img.id)">Usuń</a>
                 </div>
             </div>
         </div>

@@ -2,26 +2,17 @@
 
 {% extends 'AdminBundle::base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}
-
 {% block content %}
-    <div class="row">
-        {% for file in files %}
-            <img class="media-library-img" data-toggle="modal" data-target="#single-img-modal" data-id={{ file.id }}
-                 src="{{ (asset('media/') ~ file.name) | imagine_filter('thumbnails_large') }}">
-        {% endfor %}
+    <div ng-controller="MediaLibraryController as ctrl">
+        <div class="row">
+            {% for file in files %}
+                <img class="media-library-img" data-toggle="modal" data-target="#image-detail-modal" data-id={{ file.id }}
+                     src="{{ (asset('media/') ~ file.name) | imagine_filter('thumbnails_large') }}" ng-click="ctrl.showDetails({{ file.id }})">
+            {% endfor %}
+        </div>
+
+        <div id="image-detail-modal" class="modal fade" role="dialog">
+            {% include 'AdminBundle::Modal/Media/library.html.twig' %}
+        </div>
     </div>
-
-    <div id="single-img-modal" class="modal fade" role="dialog">
-    </div>
-
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-{% endblock %}
-

@@ -1,0 +1,8 @@
+AdminBundle\Entity\Post:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        title:
+            expose: true
+            groups: ['post']

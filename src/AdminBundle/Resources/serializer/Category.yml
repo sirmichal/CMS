@@ -1,0 +1,11 @@
+AdminBundle\Entity\Category:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        category:
+            expose: true
+            groups: ['category']
+        posts:
+            expose: true
+            groups: ['category']

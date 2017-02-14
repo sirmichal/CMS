@@ -9,6 +9,11 @@ admin:
     prefix:   /admin
     schemes:  [https]
 
+rest:
+    resource: "@AdminBundle/Controller/RestController.php"
+    type: rest
+    prefix: /admin/rest
+    
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     prefix:   /admin

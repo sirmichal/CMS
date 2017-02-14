@@ -87,10 +87,6 @@ vich_uploader:
 
 #LiipImagineBundle Configuration
 liip_imagine:
-    resolvers:
-        default:
-            web_path: ~
-
     filter_sets:
         thumbnails_large:
             filters:
@@ -116,6 +112,24 @@ liip_imagine:
 # FOSJsRoutingBundle Configuration
 fos_js_routing:
     routes_to_expose: ['get_modal', 'posts_modal_add_img_render', 'get_media_specific_cache', 'slider_modal_add_img_render', 'slider_modal_add_img_submit', 'slider_delete_img']
+
+# FOSRestBundle
+fos_rest:
+    routing_loader:
+        default_format: json
+    view:
+        view_response_listener: true
+        
+# JMS serializer
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "@AdminBundle/Resources/serializer"
+            entities:
+                namespace_prefix: "AdminBundle\\Entity"
+                path: "@AdminBundle/Resources/serializer"
 
 admin:
     forms:
