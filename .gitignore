@@ -3,13 +3,11 @@ var/
 
 # Parameters
 /app/config/parameters.yml
-/app/config/parameters.ini
 
 # Managed by Composer
 /app/bootstrap.php.cache
 /bin/*
 !bin/console
-!bin/symfony_requirements
 /vendor/
 
 # Managed by npm
@@ -27,3 +25,5 @@ var/
 
 # gulp things
 .ftppass
+gulpfile.js
+/web/config.php
