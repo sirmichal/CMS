@@ -69,6 +69,7 @@ class DefaultController extends Controller
         $form = $this->createForm(FileUploadForm::class, $media);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            die();
             $em = $this->getDoctrine()->getManager();
             $em->persist($media);
             $em->flush();

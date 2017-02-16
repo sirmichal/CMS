@@ -40,7 +40,13 @@ class RestController extends FOSRestController
     }
     
     public function deleteImageAction($id) {
-        return new Response();
+
+        $mngr = $this->get('entity_manager');
+        $mngr->setEntityClassName('AdminBundle:Media');
+        
+        $success = $mngr->delete($id);
+
+        return $this->view($success, Response::HTTP_METHOD_NOT_ALLOWED);
     }
 
     protected function getFilteredView($data, $groups) {
