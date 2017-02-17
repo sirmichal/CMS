@@ -7,11 +7,6 @@ $('.edit-row').hover(
         }
 );
 
-$('#file_upload_form_file').change(function () {
-    var name = $(this)[0].files[0]['name'];
-    $('#filename-upload').html(name);
-});
-
 var enlarge_anim_time = 250;
 $('#label-upload').hover(
     function(){

@@ -3,6 +3,22 @@ AdminBundle\Entity\Post:
     properties:
         id:
             expose: true
+            groups: ['posts', 'categories', 'single_category']
         title:
             expose: true
-            groups: ['post']
+            groups: ['posts', 'single_post']
+        content:
+            expose: true
+            groups: ['posts', 'single_post']
+        user:
+            expose: true
+            groups: ['posts', 'single_post']
+        thumbnail:
+            expose: true
+            groups: ['posts', 'single_post']
+        created:
+            expose: true
+            groups: ['posts', 'single_post']
+        categories:
+            expose: true
+            groups: ['posts', 'single_post']

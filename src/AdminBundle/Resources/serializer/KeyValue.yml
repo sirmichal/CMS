@@ -1,0 +1,10 @@
+AdminBundle\Entity\KeyValue:
+    exclusion_policy: ALL
+    properties:
+        attr:
+            expose: true
+            groups: ['keys_values']
+        value:
+            expose: true
+            groups: ['keys_values', 'single_key_value']
+        

@@ -3,9 +3,10 @@ AdminBundle\Entity\Category:
     properties:
         id:
             expose: true
+            groups: ['categories', 'posts', 'single_post']
         category:
             expose: true
-            groups: ['category']
+            groups: ['categories', 'single_category']
         posts:
             expose: true
-            groups: ['category']
+            groups: ['categories', 'single_category']

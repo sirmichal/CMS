@@ -6,6 +6,8 @@
 
 namespace AdminBundle\Service;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class EntityManagerService {
     
     private $doctrine;
@@ -19,16 +21,16 @@ class EntityManagerService {
         $this->entityClassName = $entityClassName;
     }
 
-    public function delete($id) {
-        $success = false;
-        $entity = $this->doctrine->getRepository($this->entityClassName)->findOneById($id);
+    public function deleteOne($condition, $conditionName) {
+        $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        $entity = $this->doctrine->getRepository($this->entityClassName)->findOneBy(array($conditionName => $condition));
         if(null != $entity) {
             $em = $this->doctrine->getManager();
             $em->remove($entity);
-//            $em->flush();
-            $success = true;
+            $em->flush();
+            $responseCode = Response::OK;
         }
-        return $success;
+        return $responseCode;
     }
 
 }

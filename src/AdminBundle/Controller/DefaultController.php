@@ -69,7 +69,6 @@ class DefaultController extends Controller
         $form = $this->createForm(FileUploadForm::class, $media);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            die();
             $em = $this->getDoctrine()->getManager();
             $em->persist($media);
             $em->flush();
@@ -121,35 +120,6 @@ class DefaultController extends Controller
         $keyValueFormService->submit($request);
 
         return $this->render('AdminBundle:Default:literals.html.twig', array('form' => $form->createView()));
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     * @Route("getModal", name="get_modal")
-     */
-    public function getModalAction(Request $request)
-    {
-        $id = $request->query->get('id');
-
-        /** @var Media $media */
-        $media = $this->getDoctrine()->getManager()->getRepository('AdminBundle:Media')->findOneById($id);
-
-        $imagineCacheManager = $this->get('liip_imagine.cache.manager');
-        $preview_path = $imagineCacheManager->getBrowserPath('media/' . $media->getName(), 'single_image');
-
-        $rawInfo = getimagesize('media/' . $media->getName());
-        $info['width'] = $rawInfo[0];
-        $info['height'] = $rawInfo[1];
-        $info['mime'] = $rawInfo['mime'];
-        $info['size'] = filesize('media/' . $media->getName());
-
-        $view = $this->renderView('AdminBundle:Modal/Media:library.html.twig',
-            array(
-                'media' => $media,
-                'info' => $info,
-                'preview_path' => $preview_path));
-        return new Response($view);
     }
 
     /**

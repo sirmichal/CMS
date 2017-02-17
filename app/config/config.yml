@@ -115,6 +115,7 @@ fos_js_routing:
 
 # FOSRestBundle
 fos_rest:
+    param_fetcher_listener: true
     routing_loader:
         default_format: json
     view:
@@ -125,8 +126,8 @@ jms_serializer:
     metadata:
         directories:
             FOSUB:
-                namespace_prefix: "FOS\\UserBundle"
-                path: "@AdminBundle/Resources/serializer"
+                namespace_prefix: "FOS\\UserBundle\\Model"
+                path: "@AdminBundle/Resources/serializer/FOS"
             entities:
                 namespace_prefix: "AdminBundle\\Entity"
                 path: "@AdminBundle/Resources/serializer"

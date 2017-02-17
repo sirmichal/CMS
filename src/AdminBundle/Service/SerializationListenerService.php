@@ -29,7 +29,7 @@ class SerializationListenerService implements EventSubscriberInterface {
         $object = $event->getObject();
         
         if($object instanceof \AdminBundle\Entity\Media) {
-            if (in_array('details', $groups)) {
+            if (in_array('single_media', $groups)) {
                 $path = 'media/' . $object->getName();
                 $filter = 'single_image';
                 

@@ -3,37 +3,24 @@
 {% extends 'AdminBundle::base.html.twig' %}
 {% form_theme form _self %}
 
-{# this is to remove <div> around <label> #}
-{%- block form_row -%}
-        {{- form_label(form) -}}
-        {{- form_errors(form) -}}
-        {{- form_widget(form) -}}
-{%- endblock form_row -%}
-
 {% block file_label %}
-    {% spaceless %}
-        {% if not compound %}
-            {% set label_attr = label_attr|merge({'for': id}) %}
-        {% endif %}
-        {% if required %}
-            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-        {% endif %}
-        {% set label = '<img src=' ~ asset('assets/img/upload.png') ~ '>' %}
-        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %} id="label-upload">{{ label|raw }}</label>
-    {% endspaceless %}
+    <label id="label-upload" for="file_upload_form_file" class="required">
+        <img src={{ asset('assets/img/upload.png') }}>
+    </label>
 {% endblock %}
 
 {% block content %}
     <div class="row">
-
-            {{ form_start(form) }}
-                {{ form_row(form.file) }}
-                <div id="filename-upload"></div>
-                <div id="submit-upload">
-                    <button type="submit" class="btn btn-primary btn-lg">Wyślij</button>
-                </div>
+        <div ng-controller="UploadController as ctrl">
+            {{ form_start(form, {'attr': {'action': 'upload' }}) }}
+            {{ form_label(form.file) }}
+            {{ form_widget(form.file, {'attr': {'class': 'hide', 'custom-on-change': 'ctrl.fileChanged'}}) }}
+            <div id="submit-upload">
+                <h3>{*{ ctrl.filename }*}</h3>
+                <button class="btn btn-primary btn-lg" ng-disabled="!ctrl.filename">Wyślij</button>
+            </div>
             {{ form_end(form) }}
-
+        </div>
     </div>
 {% endblock %}
 

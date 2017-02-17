@@ -1,6 +1,6 @@
-AdminBundle\Entity\User:
+FOS\UserBundle\Model\User:
     exclusion_policy: ALL
     properties:
-        id:
+        username:
             expose: true
             groups: ['posts', 'single_post']

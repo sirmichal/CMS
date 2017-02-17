@@ -3,6 +3,7 @@ AdminBundle\Entity\Media:
     properties:
         id:
             expose: true
+            groups: ['posts', 'single_post']
         name:
             expose: true
-            groups: ['media']
+            groups: ['posts', 'single_post']

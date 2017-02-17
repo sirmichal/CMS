@@ -10,43 +10,48 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Context\Context;
 
-use AdminBundle\Repository\MediaRepository;
-
 class RestController extends FOSRestController 
 {
     public function getCategoriesAction() {
         $result = $this->getDoctrine()->getRepository('AdminBundle:Category')->findAll();
-        return $this->getFilteredView($result, ['category', 'Default']);
+        return $this->getFilteredView($result, ['categories']);
     }
     
     public function getCategoryAction($id) {
         $result = $this->getDoctrine()->getRepository('AdminBundle:Category')->findOneById($id);
-        return $this->getFilteredView($result, ['category', 'Default']);
+        return $this->getFilteredView($result, ['single_category']);
     }
 
     public function getPostsAction() {
         $result = $this->getDoctrine()->getRepository('AdminBundle:Post')->findAll();
-        return $this->getFilteredView($result, ['post', 'Default']);
+        return $this->getFilteredView($result, ['posts']);
     }
     
     public function getPostAction($id) {
         $result = $this->getDoctrine()->getRepository('AdminBundle:Post')->findOneById($id);
-        return $this->getFilteredView($result, ['post', 'Default']);
+        return $this->getFilteredView($result, ['single_post']);
     }
     
-    public function getImageAction($id) {
+    public function getMediaAction($id) {
         $result = $this->getDoctrine()->getRepository('AdminBundle:Media')->findOneById($id);
-        return $this->getFilteredView($result, ['media', 'details', 'Default']);
+        return $this->getFilteredView($result, ['single_media']);
     }
-    
-    public function deleteImageAction($id) {
 
-        $mngr = $this->get('entity_manager');
-        $mngr->setEntityClassName('AdminBundle:Media');
-        
-        $success = $mngr->delete($id);
+    public function getLiteralsAction() {
+        $result = $this->getDoctrine()->getRepository('AdminBundle:KeyValue')->findAll();
+        return $this->getFilteredView($result, ['keys_values']);
+    }
 
-        return $this->view($success, Response::HTTP_METHOD_NOT_ALLOWED);
+    public function getLiteralAction($attr) {
+        $result = $this->getDoctrine()->getRepository('AdminBundle:KeyValue')->findOneByAttr($attr);
+        return $this->getFilteredView($result, ['single_key_value']);
+    }
+
+    public function deleteMediaAction($id) {
+        $entityMngr = $this->get('entity_manager');
+        $entityMngr->setEntityClassName('AdminBundle:Media');
+        $responseCode = $entityMngr->deleteOne($id, 'id');
+        return $this->view(null, $responseCode);
     }
 
     protected function getFilteredView($data, $groups) {
