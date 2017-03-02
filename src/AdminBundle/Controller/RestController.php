@@ -5,6 +5,7 @@
 
 namespace AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
@@ -51,6 +52,14 @@ class RestController extends FOSRestController
         $entityMngr = $this->get('entity_manager');
         $entityMngr->setEntityClassName('AdminBundle:Media');
         $responseCode = $entityMngr->deleteOne($id, 'id');
+        return $this->view(null, $responseCode);
+    }
+    
+    public function postSubscribersAction(Request $request) {
+        $json = $request->getContent();
+        $entity = $this->get('jms_serializer')->deserialize($json, 'BlogBundle\Entity\Subscriber', 'json');
+        $entityMngr = $this->get('entity_manager');
+        $responseCode = $entityMngr->persist($entity);
         return $this->view(null, $responseCode);
     }
 

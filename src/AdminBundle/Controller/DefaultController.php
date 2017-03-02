@@ -139,5 +139,14 @@ class DefaultController extends Controller
 
         return new Response($preview_path);
     }
+    
+    
+    /**
+     * @Route("subscribers_beta", name="subscribers_beta")
+     * @return Response
+     */
+    public function subscriberAction(Request $request) {
+        return $this->render('AdminBundle:Default:subscribers.html.twig');
+    }
 
 }

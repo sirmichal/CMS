@@ -8,11 +8,11 @@ app.controller('MediaLibraryController', ['$http', '$window', function($http, $w
     
     self.showDetails = function(id) {
         $http.get('/admin/rest/media/' + id).then(function (response) {
-            self.img = response.data;
+            self.media = response.data;
         });
     };
     
-    self.deleteImg = function (id) {
+    self.delete = function (id) {
         $http.delete('/admin/rest/media/' + id).then(function () {
             $window.location.reload();
         });
@@ -50,6 +50,18 @@ app.controller('UploadController', ['$scope', function ($scope) {
         $scope.$apply();
     };
 }]);
+
+
+app.controller('SubController', ['$http', function ($http) {
+        var self = this;
+
+        self.submit = function() {
+            $http.post('rest/subscribers', JSON.stringify({'email' : self.email})).then(function(response) {
+                console.log(response.data);
+            });
+        };
+}]);
+
 
 app.directive('customOnChange', function () {
     return {

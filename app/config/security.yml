@@ -49,3 +49,10 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+dunglas_angular_csrf:
+    cookie:
+        set_on:
+            - { path: ^/admin/login$ }
+    secure:
+        - { path: ^/admin/rest, methods: [POST, PUT, PATCH, LINK, DELETE] }

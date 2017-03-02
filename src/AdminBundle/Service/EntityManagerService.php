@@ -32,5 +32,14 @@ class EntityManagerService {
         }
         return $responseCode;
     }
+    
+    public function persist($entity) {
+        $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        $em = $this->doctrine->getManager();
+//        $em->persist($entity);
+//        $em->flush();
+        $responseCode = Response::HTTP_OK;
+        return $responseCode;
+    }
 
 }
