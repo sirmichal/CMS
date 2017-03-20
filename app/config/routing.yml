@@ -1,19 +1,24 @@
 blog:
     resource: "@BlogBundle/Controller/"
     type:     annotation
+    schemes:  [https]
 
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
+    schemes:  [https]
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     prefix:   /admin
+    schemes:  [https]
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
     prefix:   /admin
+    schemes:  [https]
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    schemes:  [https]
