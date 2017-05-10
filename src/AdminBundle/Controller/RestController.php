@@ -14,7 +14,9 @@ use FOS\RestBundle\Context\Context;
 class RestController extends FOSRestController 
 {
     public function getCategoriesAction() {
-        $result = $this->getDoctrine()->getRepository('AdminBundle:Category')->findAll();
+        $entityMngr = $this->get('entity_manager');
+        $entityMngr->setEntityClassName('AdminBundle:Category');
+        $result = $entityMngr->findAll();
         return $this->getFilteredView($result, ['categories']);
     }
     
@@ -24,7 +26,9 @@ class RestController extends FOSRestController
     }
 
     public function getPostsAction() {
-        $result = $this->getDoctrine()->getRepository('AdminBundle:Post')->findAll();
+        $entityMngr = $this->get('entity_manager');
+        $entityMngr->setEntityClassName('AdminBundle:Post');
+        $result = $entityMngr->findAll();
         return $this->getFilteredView($result, ['posts']);
     }
     
@@ -39,7 +43,9 @@ class RestController extends FOSRestController
     }
 
     public function getLiteralsAction() {
-        $result = $this->getDoctrine()->getRepository('AdminBundle:KeyValue')->findAll();
+        $entityMngr = $this->get('entity_manager');
+        $entityMngr->setEntityClassName('AdminBundle:KeyValue');
+        $result = $entityMngr->findAll();
         return $this->getFilteredView($result, ['keys_values']);
     }
 
@@ -73,8 +79,7 @@ class RestController extends FOSRestController
             $context->addGroups($groups);
             $view->setContext($context);
         }
-        
         return $view;
     }
-
+    
 }

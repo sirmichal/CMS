@@ -7,13 +7,13 @@ app.controller('MediaLibraryController', ['$http', '$window', function($http, $w
     var self = this;
     
     self.showDetails = function(id) {
-        $http.get('/admin/rest/media/' + id).then(function (response) {
+        $http.get('/api/media/' + id).then(function (response) {
             self.media = response.data;
         });
     };
     
     self.delete = function (id) {
-        $http.delete('/admin/rest/media/' + id).then(function () {
+        $http.delete('/api/media/' + id).then(function () {
             $window.location.reload();
         });
     };

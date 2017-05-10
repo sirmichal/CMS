@@ -110,8 +110,8 @@ liip_imagine:
                     mode: outbound
 
 # FOSJsRoutingBundle Configuration
-fos_js_routing:
-    routes_to_expose: ['get_image', 'get_modal', 'posts_modal_add_img_render', 'get_media_specific_cache', 'slider_modal_add_img_render', 'slider_modal_add_img_submit', 'slider_delete_img']
+#fos_js_routing:
+#    routes_to_expose: ['get_image', 'get_modal', 'posts_modal_add_img_render', 'get_media_specific_cache', 'slider_modal_add_img_render', 'slider_modal_add_img_submit', 'slider_delete_img']
 
 # FOSRestBundle
 fos_rest:

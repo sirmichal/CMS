@@ -37,7 +37,6 @@ security:
             
     access_control:        
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/rest/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: IS_AUTHENTICATED_FULLY }
 
 #        main:
@@ -50,9 +49,9 @@ security:
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
-dunglas_angular_csrf:
-    cookie:
-        set_on:
-            - { path: ^/admin/login$ }
-    secure:
-        - { path: ^/admin/rest, methods: [POST, PUT, PATCH, LINK, DELETE] }
+#dunglas_angular_csrf:
+#    cookie:
+#        set_on:
+#            - { path: ^/$ }
+#    secure:
+#        - { path: ^/, methods: [POST, PUT, PATCH, LINK, DELETE] }
